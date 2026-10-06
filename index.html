@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DKVEST</title>
+<meta name="description" content="디케이베스트 주식회사는 경기도 화성시에 있는 회사로, 생활·위생용품 브랜드를 준비하고 성장 가능성이 있는 사업에 투자합니다.">
+<meta property="og:title" content="디케이베스트 주식회사 · DKVEST Co., Ltd.">
+<meta property="og:description" content="A company in Hwaseong, Korea, preparing household and hygiene product brands and investing in growing businesses.">
+<meta property="og:url" content="https://dkvest.com">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2324272C'/%3E%3Crect x='14' y='18' width='36' height='6' rx='2' fill='%23DCDDD8'/%3E%3Crect x='14' y='29' width='36' height='6' rx='2' fill='%239AA6C4'/%3E%3Crect x='14' y='40' width='36' height='6' rx='2' fill='%235C6F9E'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+<style>
+  /* Layout: 일반적인 회사 홈페이지 순서. 첫 화면 → 인사말 → 사업 분야 → 연혁 → 브랜드 → 제휴 문의 → 회사 정보·오시는 길 */
+  :root {
+    --bg: #F3F3F0;
+    --surface: #FFFFFF;
+    --ink: #24272C;
+    --muted: #5E636B;
+    --line: #DADBD6;
+    --accent: #3E5487;
+    --accent-soft: #E3E7F1;
+    --ok: #3B6B4F;
+    --ok-soft: #E2EEE6;
+    --layer1: #DCDDD8;
+    --layer2: #9AA6C4;
+    --layer3: #5C6F9E;
+    --font: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17191D; --surface: #1F2227; --ink: #E8E9E6; --muted: #A4A9B1; --line: #31353B;
+      --accent: #9DB0E0; --accent-soft: #263049; --ok: #8CC7A2; --ok-soft: #1F3328;
+      --layer1: #3A3E45; --layer2: #4F5E85; --layer3: #7D93C9;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17191D; --surface: #1F2227; --ink: #E8E9E6; --muted: #A4A9B1; --line: #31353B;
+    --accent: #9DB0E0; --accent-soft: #263049; --ok: #8CC7A2; --ok-soft: #1F3328;
+    --layer1: #3A3E45; --layer2: #4F5E85; --layer3: #7D93C9;
+    color-scheme: dark;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(76px + env(safe-area-inset-top, 0px)); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--font); font-size: 17px; line-height: 1.75;
+    word-break: keep-all; overflow-wrap: break-word; -webkit-font-smoothing: antialiased;
+    padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px);
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding-inline: 24px; }
+  .label { font: 500 12px var(--mono); letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px; }
+
+  /* 상단 메뉴 */
+  header.top {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 68px; }
+  .wordmark { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 700; letter-spacing: 0.12em; font-size: 16px; }
+  .wordmark i { display: grid; gap: 3px; width: 22px; }
+  .wordmark i b { display: block; height: 4px; border-radius: 2px; }
+  .wordmark i b:nth-child(1) { background: var(--layer1); }
+  .wordmark i b:nth-child(2) { background: var(--layer2); }
+  .wordmark i b:nth-child(3) { background: var(--layer3); }
+  .right { display: flex; align-items: center; gap: 26px; }
+  nav ul { display: flex; gap: 26px; list-style: none; margin: 0; padding: 0; }
+  nav a { color: var(--muted); text-decoration: none; font-size: 15px; font-weight: 500; }
+  nav a:hover { color: var(--ink); }
+  nav .cta { color: var(--accent); font-weight: 700; }
+  .lang { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+  .lang button { font: 500 12px var(--mono); color: var(--muted); background: transparent; border: 0; padding: 6px 11px; cursor: pointer; }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+  @media (max-width: 860px) { nav li:not(:last-child) { display: none; } .right { gap: 14px; } }
+
+  /* 첫 화면 */
+  .hero { border-bottom: 1px solid var(--line); }
+  .hero .wrap { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; padding-block: 88px 80px; }
+  .hero .wrap > * { min-width: 0; }
+  .hero h1 { margin: 0; font-size: clamp(34px, 5.6vw, 58px); line-height: 1.18; font-weight: 700; letter-spacing: -0.03em; text-wrap: balance; }
+  .hero .sub { margin: 22px 0 0; color: var(--muted); font-size: 18px; max-width: 32em; }
+  .actions { margin-top: 32px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn { display: inline-flex; align-items: center; padding: 12px 22px; border-radius: 999px; font-weight: 600; font-size: 16px; text-decoration: none; border: 1.5px solid var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--bg); }
+  .btn.ghost { background: transparent; color: var(--accent); }
+  .layers { position: relative; aspect-ratio: 5 / 4; max-width: 100%; }
+  .layers .sheet { position: absolute; left: 6%; right: 6%; height: 34%; border-radius: 14px; transform: skewY(-8deg); }
+  .layers .s1 { top: 6%; background: var(--layer1); }
+  .layers .s2 { top: 30%; background: var(--layer2); opacity: 0.92; }
+  .layers .s3 { top: 54%; background: var(--layer3); opacity: 0.92; }
+  @media (prefers-reduced-motion: no-preference) {
+    .layers .sheet { animation: settle 0.9s ease-out both; }
+    .layers .s2 { animation-delay: 0.08s; } .layers .s3 { animation-delay: 0.16s; }
+    @keyframes settle { from { transform: skewY(-8deg) translateY(-10px); } to { transform: skewY(-8deg) translateY(0); } }
+  }
+  @media (max-width: 860px) { .hero .wrap { grid-template-columns: 1fr; padding-block: 60px 52px; } .layers { max-width: 380px; } }
+
+  /* 구역 공통 */
+  section.block { padding-block: 84px; border-bottom: 1px solid var(--line); }
+  .block h2 { margin: 0 0 28px; font-size: clamp(26px, 3.4vw, 34px); line-height: 1.3; font-weight: 700; letter-spacing: -0.02em; text-wrap: balance; }
+  .two { display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: start; }
+  .two > * { min-width: 0; }
+  @media (max-width: 860px) { .two { grid-template-columns: 1fr; gap: 28px; } }
+
+  /* 인사말 */
+  .message p { margin: 0 0 16px; max-width: 36em; }
+  .sign { margin-top: 24px; color: var(--muted); font-size: 15px; }
+  .sign strong { color: var(--ink); font-size: 17px; margin-left: 6px; }
+
+  /* 사업 분야 */
+  .biz { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+  .biz li { display: grid; grid-template-columns: 250px 1fr; gap: 24px; padding: 22px 0; border-bottom: 1px solid var(--line); }
+  .biz li > * { min-width: 0; }
+  .biz h3 { margin: 0; font-size: 19px; font-weight: 700; }
+  .biz p { margin: 0; color: var(--muted); }
+  .chip { display: inline-block; margin-top: 6px; font: 500 11.5px var(--mono); letter-spacing: 0.06em; padding: 3px 9px; border-radius: 999px; }
+  .chip.on { color: var(--ok); background: var(--ok-soft); }
+  .chip.dev { color: var(--accent); background: var(--accent-soft); }
+  @media (max-width: 720px) { .biz li { grid-template-columns: 1fr; gap: 4px; } }
+
+  /* 연혁 */
+  .history { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+  .history li { display: grid; grid-template-columns: 120px 1fr; gap: 20px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .history time { font: 500 15px var(--mono); font-variant-numeric: tabular-nums; color: var(--accent); }
+  .history span { min-width: 0; }
+
+  /* 브랜드 준비 중 */
+  .brand { background: var(--ink); color: var(--bg); border-radius: 16px; padding: 40px; display: grid; grid-template-columns: auto 1fr; gap: 32px; align-items: center; }
+  .brand .bars { display: grid; gap: 8px; width: 88px; }
+  .brand .bars b { display: block; height: 14px; border-radius: 4px; }
+  .brand .bars b:nth-child(1) { background: var(--layer1); }
+  .brand .bars b:nth-child(2) { background: var(--layer2); }
+  .brand .bars b:nth-child(3) { background: var(--layer3); }
+  .brand h3 { margin: 0 0 6px; font-size: 22px; }
+  .brand p { margin: 0; opacity: 0.85; max-width: 34em; }
+  @media (max-width: 600px) { .brand { grid-template-columns: 1fr; padding: 28px; gap: 20px; } }
+
+  /* 제휴 문의 */
+  .fields { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .fields li { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; }
+  .fields strong { display: block; }
+  .fields span { color: var(--muted); font-size: 15px; }
+  .muted { color: var(--muted); }
+  .partner-head { display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: end; margin-bottom: 36px; }
+  .partner-head > * { min-width: 0; }
+  @media (max-width: 860px) { .partner-head { grid-template-columns: 1fr; gap: 16px; } }
+  .specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .spec-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px 22px 10px; min-width: 0; }
+  .spec-card h3 { margin: 0 0 4px; font-size: 18px; }
+  .spec-card .what { margin: 0 0 12px; color: var(--muted); font-size: 14.5px; }
+  .spec-card dl { margin: 0; }
+  .spec-card dl div { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding: 9px 0; border-top: 1px solid var(--line); font-size: 14.5px; }
+  .spec-card dt { color: var(--muted); }
+  .spec-card dd { margin: 0; min-width: 0; font-variant-numeric: tabular-nums; }
+  .common { margin-top: 16px; display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .common > div { border-top: 2px solid var(--ink); padding-top: 14px; min-width: 0; }
+  .common h3 { margin: 0 0 8px; font-size: 16px; }
+  .common ul { margin: 0; padding-left: 1.1em; color: var(--muted); font-size: 15px; display: grid; gap: 4px; }
+  .faq { margin-top: 48px; }
+  .faq-title { margin: 0 0 14px; font-size: 20px; }
+  .faq dl { margin: 0; border-top: 2px solid var(--ink); }
+  .faq dl > div { display: grid; grid-template-columns: 300px 1fr; gap: 24px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .faq dt { font-weight: 600; min-width: 0; }
+  .faq dd { margin: 0; color: var(--muted); min-width: 0; }
+  @media (max-width: 720px) { .faq dl > div { grid-template-columns: 1fr; gap: 4px; } }
+  .mail { display: inline-block; margin-top: 8px; font-size: clamp(22px, 3.4vw, 30px); font-weight: 700; color: var(--ink); text-decoration: none; border-bottom: 3px solid var(--accent); overflow-wrap: anywhere; }
+
+  /* 회사 정보 */
+  .info { margin: 0; border-top: 2px solid var(--ink); }
+  .info div { display: grid; grid-template-columns: 150px 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+  .info dt { color: var(--muted); font-size: 15px; }
+  .info dd { margin: 0; min-width: 0; font-variant-numeric: tabular-nums; }
+  @media (max-width: 560px) { .info div, .history li { grid-template-columns: 1fr; gap: 2px; } }
+
+  footer { padding-block: 40px 60px; color: var(--muted); font-size: 14px; line-height: 1.9; }
+  footer .legal { display: flex; flex-wrap: wrap; column-gap: 20px; }
+  footer .copy { margin-top: 12px; }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="wordmark" href="#top" aria-label="DKVEST"><i aria-hidden="true"><b></b><b></b><b></b></i>DKVEST</a>
+    <div class="right">
+      <nav aria-label="Menu">
+        <ul>
+          <li><a href="#about" data-en="About">회사 소개</a></li>
+          <li><a href="#business" data-en="Business">사업 분야</a></li>
+          <li><a href="#history" data-en="History">연혁</a></li>
+          <li><a href="#company" data-en="Location">오시는 길</a></li>
+          <li><a class="cta" href="#partner" data-en="Partnership">제휴 문의</a></li>
+        </ul>
+      </nav>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" id="lang-ko" data-lang="ko" aria-pressed="true">KO</button>
+        <button type="button" id="lang-en" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <p class="label" data-en="DKVEST Co., Ltd. · Hwaseong, Korea">디케이베스트 주식회사 · 경기도 화성</p>
+        <h1 id="hero-title" data-en="Turning everyday discomforts into better products.">생활 속 불편을, 잘 만든 제품으로 바꿉니다.</h1>
+        <p class="sub" data-en="We invest in growing businesses and are preparing our own household and hygiene product brand, starting with bedding protection.">디케이베스트는 성장 가능성이 있는 사업에 투자하고, 침구 보호 제품을 시작으로 생활·위생용품 브랜드를 준비하고 있습니다.</p>
+        <div class="actions">
+          <a class="btn primary" href="#partner" data-en="Partnership inquiry">제휴 문의</a>
+          <a class="btn ghost" href="#about" data-en="About us">회사 소개</a>
+        </div>
+      </div>
+      <div class="layers" aria-hidden="true">
+        <div class="sheet s1"></div><div class="sheet s2"></div><div class="sheet s3"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="about" aria-labelledby="about-title">
+    <div class="wrap two">
+      <div>
+        <p class="label" data-en="About">About</p>
+        <h2 id="about-title" data-en="A message from our CEO">인사말</h2>
+      </div>
+      <div class="message">
+        <p data-en="DKVEST was founded in Hwaseong, Gyeonggi-do in September 2025. We began by investing in and supporting small businesses that serve people in their neighbourhoods.">디케이베스트는 2025년 9월 경기도 화성에서 설립되었습니다. 지역에서 사람들을 직접 만나는 작은 사업에 투자하고, 운영을 함께 고민하는 일로 시작했습니다.</p>
+        <p data-en="Now we are preparing our own brand. We start from small inconveniences people put up with at home, and we decide on materials and quality through testing rather than assumptions.">이제는 우리 이름을 건 생활용품 브랜드를 준비하고 있습니다. 집에서 참고 넘기던 작은 불편에서 출발하고, 소재와 품질은 짐작이 아니라 시험으로 정합니다.</p>
+        <p data-en="We are a small company, so we value partners who work with us for the long term. We will build trust one honest transaction at a time.">작은 회사인 만큼 오래 함께할 파트너를 소중히 여깁니다. 약속한 것을 지키는 거래로 신뢰를 쌓겠습니다.</p>
+        <p class="sign"><span data-en="CEO, DKVEST Co., Ltd.">디케이베스트 주식회사 대표이사</span><strong data-en="Daeho Kim">김대호</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="business" aria-labelledby="biz-title">
+    <div class="wrap">
+      <p class="label" data-en="Business">Business</p>
+      <h2 id="biz-title" data-en="Business areas">사업 분야</h2>
+      <ul class="biz">
+        <li>
+          <div><h3 data-en="Investment">투자</h3><span class="chip on" data-en="Active">운영 중</span></div>
+          <p data-en="We invest our own capital in businesses with growth potential and support their operations, including working capital.">성장 가능성이 있는 사업에 자기자본으로 투자하고, 운영 자금 지원과 운영 자문을 함께 합니다.</p>
+        </li>
+        <li>
+          <div><h3 data-en="Household &amp; hygiene brand">생활·위생용품 브랜드</h3><span class="chip dev" data-en="In development">개발 중</span></div>
+          <p data-en="We are developing a disposable product that protects bedding. We plan materials, design and packaging ourselves and produce with partners in Korea and abroad.">침구를 보호하는 일회용 생활용품을 개발하고 있습니다. 소재, 디자인, 포장을 직접 기획하고 국내외 파트너와 함께 생산합니다.</p>
+        </li>
+        <li>
+          <div><h3 data-en="Management &amp; IT consulting">경영·IT 컨설팅</h3><span class="chip on" data-en="Active">운영 중</span></div>
+          <p data-en="We help small businesses with business planning, online operations and software development.">소규모 사업의 사업 기획, 온라인 운영, 소프트웨어 개발을 돕습니다.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="block" id="history" aria-labelledby="history-title">
+    <div class="wrap two">
+      <div>
+        <p class="label" data-en="History">History</p>
+        <h2 id="history-title" data-en="History">연혁</h2>
+      </div>
+      <ol class="history">
+        <li><time datetime="2026-10">2026.10</time><span data-en="Started sourcing material and manufacturing partners in Korea and abroad">국내외 소재·제조 파트너 발굴 시작</span></li>
+        <li><time datetime="2026-09">2026.09</time><span data-en="Began planning a household and hygiene product brand">생활·위생용품 브랜드 사업 기획 착수</span></li>
+        <li><time datetime="2025-11">2025.11</time><span data-en="Investee company opened its store">투자 기업 매장 개업</span></li>
+        <li><time datetime="2025-10">2025.10</time><span data-en="Equity investment and working-capital support for a local retail business">지역 오프라인 매장 운영 법인에 지분 투자 및 운영 자금 지원</span></li>
+        <li><time datetime="2025-09">2025.09</time><span data-en="Founded DKVEST Co., Ltd. (Hwaseong, Gyeonggi-do)">디케이베스트 주식회사 설립 (경기도 화성시)</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="block" id="brand" aria-labelledby="brand-title">
+    <div class="wrap">
+      <div class="brand">
+        <div class="bars" aria-hidden="true"><b></b><b></b><b></b></div>
+        <div>
+          <h3 id="brand-title" data-en="Our first brand is on its way">첫 번째 브랜드를 준비하고 있습니다</h3>
+          <p data-en="A bedding protection product designed around softness, quietness and reliable waterproofing. We will share the launch here.">부드러운 촉감, 조용한 사용감, 확실한 방수를 기준으로 만드는 침구 보호 제품입니다. 출시 소식은 이곳에서 알려 드립니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="partner" aria-labelledby="partner-title">
+    <div class="wrap">
+      <div class="partner-head">
+        <div>
+          <p class="label" data-en="Partnership">Partnership</p>
+          <h2 id="partner-title" data-en="Partnership inquiries">제휴 문의</h2>
+        </div>
+        <div>
+          <p class="muted" data-en="We are looking for material suppliers and manufacturers for a wide-format disposable product. If you can supply anything below, please email your company profile and data sheets. We reply within 2 business days.">폭이 넓은 일회용 생활용품을 함께 만들 소재사와 제조사를 찾고 있습니다. 아래 항목 중 공급이나 가공이 가능하시면 회사 소개와 제품 사양서를 메일로 보내 주세요. 영업일 기준 2일 안에 답변드립니다.</p>
+          <a class="mail" href="mailto:contact@dkvest.com">contact@dkvest.com</a>
+        </div>
+      </div>
+
+      <div class="specs">
+        <div class="spec-card">
+          <h3 data-en="Skin-contact nonwoven">피부 접촉용 부직포</h3>
+          <p class="what" data-en="Top layer that touches the skin">피부에 직접 닿는 윗면 소재</p>
+          <dl>
+            <div><dt data-en="Type">종류</dt><dd data-en="Spunlace (viscose/PET 50:50 or 70:30, lyocell, cotton 100%)">스펀레이스 (레이온·PET 50:50 또는 70:30, 라이오셀, 순면 100%)</dd></div>
+            <div><dt data-en="Weight">평량</dt><dd>30–50 gsm</dd></div>
+            <div><dt data-en="Width">폭</dt><dd data-en="150 cm or more (160 cm preferred)">150cm 이상 (160cm 희망)</dd></div>
+            <div><dt data-en="Surface">표면</dt><dd data-en="Plain or embossed (pearl, dot)">무지 또는 엠보 (펄·도트 패턴)</dd></div>
+            <div><dt data-en="Safety">안전</dt><dd data-en="No fluorescent whitener or fragrance; OEKO-TEX preferred">형광증백제·향료 무첨가, OEKO-TEX 인증 우대</dd></div>
+            <div><dt data-en="Also">추가 후보</dt><dd data-en="ES through-air bonded nonwoven, 25–30 gsm, hydrophilic, low-lint grade">ES 열풍 부직포(에어스루) 25–30gsm, 친수 처리·저보풀 등급</dd></div>
+            <div><dt data-en="Data">자료</dt><dd data-en="Tensile strength (MD/CD, dry and wet), absorption, lint test">인장강도(가로·세로, 마른·젖은), 흡수량, 보풀 시험</dd></div>
+          </dl>
+        </div>
+
+        <div class="spec-card">
+          <h3 data-en="Waterproof film">방수 필름</h3>
+          <p class="what" data-en="Bottom layer that blocks liquids">액체를 막는 바닥면 소재</p>
+          <dl>
+            <div><dt data-en="Type">종류</dt><dd data-en="Non-porous TPU film (polyether and polyester both considered); breathable PE also reviewed">무공 TPU 필름 (폴리에테르·폴리에스터 모두 검토), 통기성 PE 필름도 비교 검토</dd></div>
+            <div><dt data-en="Thickness">두께</dt><dd data-en="20–30 µm (TPU), 12–20 gsm (PE)">20–30㎛ (TPU), 12–20gsm (PE)</dd></div>
+            <div><dt data-en="Hardness">경도</dt><dd>Shore 80–85A</dd></div>
+            <div><dt data-en="Width">폭</dt><dd data-en="150 cm or more (160 cm preferred)">150cm 이상 (160cm 희망)</dd></div>
+            <div><dt data-en="Surface">표면</dt><dd data-en="Matte or embossed, low noise">무광 또는 엠보, 저소음</dd></div>
+            <div><dt data-en="Data">자료</dt><dd data-en="Water vapour transmission (with test method), hydrostatic head, oil resistance">투습도(시험법 포함), 내수압, 오일 저항성</dd></div>
+            <div><dt data-en="Also">추가 후보</dt><dd data-en="PEVA (soft PE/EVA) film, 20–35 µm, matte, non-porous">PEVA(소프트 PE·EVA) 필름 20–35㎛, 무광, 무공</dd></div>
+          </dl>
+        </div>
+
+        <div class="spec-card">
+          <h3 data-en="Absorbent sheet">흡수 시트</h3>
+          <p class="what" data-en="Middle layer that locks in liquid">액체를 가두는 가운데 소재</p>
+          <dl>
+            <div><dt data-en="Type">종류</dt><dd data-en="SAP airlaid sheet (SAP paper)">SAP 에어레이드 시트 (SAP 페이퍼)</dd></div>
+            <div><dt data-en="Weight">평량</dt><dd>30–40 gsm</dd></div>
+            <div><dt data-en="Width">폭</dt><dd data-en="150 cm or more">150cm 이상</dd></div>
+            <div><dt data-en="Data">자료</dt><dd data-en="SAP content (g/m²), absorption, rewet">SAP 함량(g/㎡), 흡수량, 역류(rewet)</dd></div>
+            <div><dt data-en="Also">추가 후보</dt><dd data-en="Viscose/PET spunlace, about 30 gsm, as a middle absorbent layer">레이온·PET 스펀레이스 약 30gsm (가운데 흡수층용)</dd></div>
+          </dl>
+        </div>
+
+        <div class="spec-card">
+          <h3 data-en="Side nonwoven">날개용 부직포</h3>
+          <p class="what" data-en="Edge material tucked under the mattress">매트리스 아래로 접어 넣는 가장자리 소재</p>
+          <dl>
+            <div><dt data-en="Type">종류</dt><dd data-en="Hydrophobic PP spunbond">소수성 PP 스펀본드</dd></div>
+            <div><dt data-en="Weight">평량</dt><dd>15–20 gsm</dd></div>
+            <div><dt data-en="Width">폭</dt><dd data-en="160 cm or more">160cm 이상</dd></div>
+            <div><dt data-en="Data">자료</dt><dd data-en="Tensile strength (MD/CD), water repellency">인장강도(가로·세로), 발수성</dd></div>
+            <div><dt data-en="Also">추가 후보</dt><dd data-en="100% PET spunlace, 25–30 gsm, plain, hydrophobic">PET 100% 스펀레이스 25–30gsm, 무지, 소수성</dd></div>
+          </dl>
+        </div>
+
+        <div class="spec-card">
+          <h3 data-en="Converting &amp; OEM">가공·OEM</h3>
+          <p class="what" data-en="Turning materials into finished sheets">원단을 완제품 시트로 만드는 공정</p>
+          <dl>
+            <div><dt data-en="Lamination">합지</dt><dd data-en="Hot-melt in dot or line pattern, 150 cm or wider">핫멜트 점·선 도포, 폭 150cm 이상</dd></div>
+            <div><dt data-en="Finishing">가공</dt><dd data-en="Ultrasonic quilting, heat or ultrasonic edge sealing">초음파 퀼팅, 테두리 열융착·초음파 밀봉</dd></div>
+            <div><dt data-en="Cutting">재단</dt><dd data-en="Large sheets up to about 270 cm long">길이 약 270cm 대형 시트</dd></div>
+            <div><dt data-en="Packing">포장</dt><dd data-en="Multi-fold, pouch insertion and sealing, boxing">여러 번 접기, 파우치 투입·밀봉, 상자 포장</dd></div>
+            <div><dt data-en="Runs">수량</dt><dd data-en="Small prototype runs welcome">소량 시제품 대응 가능 업체 우대</dd></div>
+            <div><dt data-en="Also">추가 검토</dt><dd data-en="Three-layer lamination (top + absorbent + film) with spray hot-melt that leaves no pressed marks on the surface">3겹 합지(윗면 + 흡수층 + 필름), 표면에 눌림 자국이 남지 않는 핫멜트 스프레이 방식</dd></div>
+          </dl>
+        </div>
+
+        <div class="spec-card">
+          <h3 data-en="Packaging">포장재</h3>
+          <p class="what" data-en="Individual pouch and retail box">개별 포장 파우치와 판매용 상자</p>
+          <dl>
+            <div><dt data-en="Pouch">파우치</dt><dd data-en="Zipper pouch, matte, opaque, odour barrier">지퍼 파우치, 무광·불투명, 냄새 차단</dd></div>
+            <div><dt data-en="Size">크기</dt><dd data-en="About 26 cm (W) × 43 cm (H)">가로 약 26cm × 세로 약 43cm</dd></div>
+            <div><dt data-en="Gusset">거싯 폭</dt><dd data-en="Bottom gusset about 4 cm">바닥 거싯 약 4cm</dd></div>
+            <div><dt data-en="Opening">개봉</dt><dd data-en="Easy-tear seal on the short side with a zipper below">짧은 변 이지컷 밀봉 + 그 아래 지퍼</dd></div>
+            <div><dt data-en="Box">상자</dt><dd data-en="Sturdy printed paper box, tear-open">두꺼운 판지 인쇄 상자, 절취선 개봉</dd></div>
+            <div><dt data-en="Printing">인쇄</dt><dd data-en="Digital printing for small first runs">초기 소량은 디지털 인쇄</dd></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="common">
+        <div>
+          <h3 data-en="Please include">보내 주시면 좋은 자료</h3>
+          <ul>
+            <li data-en="Technical data sheet (weight, thickness, strength)">제품 사양서 (평량, 두께, 강도)</li>
+            <li data-en="Test reports and certifications (ISO, OEKO-TEX)">시험성적서와 인증 (ISO, OEKO-TEX 등)</li>
+            <li data-en="Maximum width, MOQ, unit price, lead time">최대 폭, 최소 주문량, 단가, 납기</li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-en="Samples">샘플</h3>
+          <ul>
+            <li data-en="A4 swatches first, then 1 m for prototypes">처음에는 A4 견본, 시제품용으로 1m</li>
+            <li data-en="We cover courier fees if needed">필요하면 배송비는 저희가 부담합니다</li>
+          </ul>
+        </div>
+        <div>
+          <h3 data-en="Volumes &amp; confidentiality">물량·비밀유지</h3>
+          <ul>
+            <li data-en="Small first orders, scaling up after launch">초기에는 소량 발주 후 판매에 맞춰 확대</li>
+            <li data-en="Full specifications shared after a mutual NDA">전체 사양은 상호 비밀유지계약 후 공유</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="faq">
+        <h3 class="faq-title" data-en="Questions partners often ask">파트너가 자주 묻는 질문</h3>
+        <dl>
+          <div>
+            <dt data-en="How large are your orders, and when?">물량과 일정은 어떻게 되나요?</dt>
+            <dd data-en="We start with first orders of a few thousand sheets and grow with sales. Samples are reviewed right away, and prototypes are made within one to two months.">초기에는 시트 수천 장 단위로 시작해 판매에 맞춰 늘립니다. 샘플은 바로 검토하고, 시제품은 1~2개월 안에 진행합니다.</dd>
+          </div>
+          <div>
+            <dt data-en="How do you pay?">결제는 어떻게 하나요?</dt>
+            <dd data-en="We pay from our corporate bank account under terms written into the contract. Sample and prototype costs can be paid in advance.">법인 계좌로 거래하고, 결제 조건은 계약서에 명시합니다. 샘플·시제품 비용은 미리 결제할 수 있습니다.</dd>
+          </div>
+          <div>
+            <dt data-en="Who sources the materials?">원단은 누가 구매하나요?</dt>
+            <dd data-en="We consider both turnkey production, including material sourcing, and supplying some key materials ourselves.">원단 수배를 포함한 턴키 생산과, 저희가 일부 핵심 소재를 직접 공급하는 방식을 모두 검토합니다.</dd>
+          </div>
+          <div>
+            <dt data-en="Do you work with overseas suppliers?">해외 업체와도 거래하나요?</dt>
+            <dd data-en="Yes. We can work on FOB terms and communicate in Korean or English.">네. 해외 업체와는 FOB 조건으로 거래할 수 있고, 한국어와 영어로 소통합니다.</dd>
+          </div>
+          <div>
+            <dt data-en="Who will review our proposal?">제안은 누가 검토하나요?</dt>
+            <dd data-en="Our CEO reviews every proposal and replies directly.">대표가 직접 검토하고 회신합니다.</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="company" aria-labelledby="company-title">
+    <div class="wrap two">
+      <div>
+        <p class="label" data-en="Company">Company</p>
+        <h2 id="company-title" data-en="Company information &amp; location">회사 정보·오시는 길</h2>
+        <p class="muted" data-en="Visits are by appointment. Please contact us by email beforehand.">방문은 사전 예약으로 가능합니다. 메일로 먼저 연락해 주세요.</p>
+      </div>
+      <dl class="info">
+        <div><dt data-en="Company">상호</dt><dd data-en="DKVEST Co., Ltd.">디케이베스트 주식회사 (DKVEST Co., Ltd.)</dd></div>
+        <div><dt data-en="CEO">대표이사</dt><dd data-en="Daeho Kim">김대호</dd></div>
+        <div><dt data-en="Founded">설립일</dt><dd>2025-09-03</dd></div>
+        <div><dt data-en="Business reg. no.">사업자등록번호</dt><dd>187-81-03832</dd></div>
+        <div><dt data-en="Corporate reg. no.">법인등록번호</dt><dd>130111-0126641</dd></div>
+        <div><dt data-en="Address">주소</dt><dd><span data-en="604-G84, Leaders Plaza, 1068 Hyohaeng-ro, Hwaseong-si, Gyeonggi-do 18383, Korea">경기도 화성시 효행로 1068, 604-G84호 (병점동, 리더스프라자)</span> · <a href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%ED%99%94%EC%84%B1%EC%8B%9C%20%ED%9A%A8%ED%96%89%EB%A1%9C%201068" target="_blank" rel="noopener" data-en="Map">지도 보기</a></dd></div>
+        <div><dt data-en="Email">이메일</dt><dd><a href="mailto:contact@dkvest.com">contact@dkvest.com</a></dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="legal">
+      <span data-en="DKVEST Co., Ltd.">상호 디케이베스트 주식회사</span>
+      <span data-en="CEO Daeho Kim">대표이사 김대호</span>
+      <span data-en="Business reg. no. 187-81-03832">사업자등록번호 187-81-03832</span>
+      <span data-en="1068 Hyohaeng-ro, Hwaseong-si, Gyeonggi-do, Korea">경기도 화성시 효행로 1068, 604-G84호</span>
+      <!-- 통신판매업 신고 후 아래 줄 주석 해제 -->
+      <!-- <span>통신판매업 신고번호 제0000-경기화성-0000호</span> -->
+    </div>
+    <p class="copy">© 2025–2026 DKVEST Co., Ltd.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var items = document.querySelectorAll('[data-en]');
+  items.forEach(function (el) { el.setAttribute('data-ko', el.innerHTML); });
+  var buttons = document.querySelectorAll('.lang button');
+  function setLang(lang) {
+    items.forEach(function (el) { el.innerHTML = el.getAttribute(lang === 'en' ? 'data-en' : 'data-ko'); });
+    buttons.forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
+    document.documentElement.lang = lang;
+    try { localStorage.setItem('dkvest-lang', lang); } catch (e) {}
+  }
+  var saved = null;
+  try { saved = localStorage.getItem('dkvest-lang'); } catch (e) {}
+  var initial = saved || ((navigator.language || 'ko').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en');
+  if (initial === 'en') setLang('en');
+  buttons.forEach(function (b) { b.addEventListener('click', function () { setLang(b.dataset.lang); }); });
+})();
+</script>
+</body>
+</html>

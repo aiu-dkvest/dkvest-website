@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
 <style>
-  /* Layout: 일반적인 회사 홈페이지 순서. 첫 화면 → 인사말 → 사업 분야 → 연혁 → 브랜드 → 제휴 문의 → 회사 정보·오시는 길 */
+  /* Layout: 일반적인 회사 홈페이지 순서. 첫 화면 → 인사말 → 사업 분야 → 연혁 → 브랜드 → 제휴 문의 → 회사 정보 */
   :root {
     --bg: #F3F3F0;
     --surface: #FFFFFF;
@@ -151,12 +151,13 @@
   .fields strong { display: block; }
   .fields span { color: var(--muted); font-size: 15px; }
   .muted { color: var(--muted); }
-  .partner-head { display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: end; margin-bottom: 36px; }
+  .partner-head { display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: start; margin-bottom: 36px; }
   .partner-head > * { min-width: 0; }
   @media (max-width: 860px) { .partner-head { grid-template-columns: 1fr; gap: 16px; } }
   /* 3겹 구조 그림 */
   .stack { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 32px 36px; margin-bottom: 40px; }
-  .stack-fig { position: relative; aspect-ratio: 5 / 4; max-width: 100%; }
+  .stack-fig { position: relative; max-width: 100%; }
+  .stack-fig svg { display: block; width: 100%; height: auto; }
   .stack-fig .ly { position: absolute; left: 12%; right: 4%; height: 20%; border-radius: 12px; transform: skewY(-8deg); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08); }
   .stack-fig .ly1 { top: 6%; background: var(--layer1); }
   .stack-fig .ly2 { top: 38%; background-color: var(--layer2); background-image: radial-gradient(circle, rgba(255, 255, 255, 0.45) 0 2.5px, transparent 3.5px); background-size: 13px 13px; }
@@ -168,6 +169,13 @@
   .num { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--bg); font: 600 14px var(--mono); }
   .stack-legend strong { display: block; font-size: 18px; }
   .stack-legend span.d { color: var(--muted); font-size: 15px; }
+  .stack-legend li.bond { padding-left: 4px; }
+  .stack-legend li.bond strong { font-size: 15px; font-weight: 600; }
+  .stack-legend li.bond span.d { font-size: 14px; }
+  .quilt { width: 26px; height: 26px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Cg stroke='%23A9A79E' stroke-width='1.6' stroke-dasharray='2 2'%3E%3Cpath d='M9 2V24M17 2V24M2 9H24M2 17H24'/%3E%3C/g%3E%3C/svg%3E") center / 26px 26px no-repeat; }
+  .glue { width: 26px; height: 26px; border-radius: 6px; border: 1px dashed var(--line); background-color: var(--surface); background-image: radial-gradient(circle, #E2A64B 0 2px, transparent 2.6px); }
+  .glue.sparse { background-size: 13px 13px; }
+  .glue.dense { background-size: 6px 6px; }
   .stack-note { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 14.5px; border-top: 1px solid var(--line); padding-top: 14px; }
   .spec-group { margin: 0 0 14px; font-size: 18px; }
   .spec-card h3 .num { width: 24px; height: 24px; font-size: 12px; margin-right: 8px; vertical-align: 2px; }
@@ -178,6 +186,10 @@
   .spec-card h3 { margin: 0 0 4px; font-size: 18px; }
   .spec-card .what { margin: 0 0 12px; color: var(--muted); font-size: 14.5px; }
   .spec-card dl { margin: 0; }
+  @supports (grid-template-rows: subgrid) {
+    .spec-card { display: grid; grid-template-rows: subgrid; grid-row: span 10; row-gap: 0; align-content: start; }
+    .spec-card dl { display: contents; }
+  }
   .spec-card dl div { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding: 9px 0; border-top: 1px solid var(--line); font-size: 14.5px; }
   .spec-card dt { color: var(--muted); }
   .spec-card dd { margin: 0; min-width: 0; font-variant-numeric: tabular-nums; }
@@ -216,7 +228,7 @@
           <li><a href="#about" data-en="About">회사 소개</a></li>
           <li><a href="#business" data-en="Business">사업 분야</a></li>
           <li><a href="#history" data-en="History">연혁</a></li>
-          <li><a href="#company" data-en="Location">오시는 길</a></li>
+          <li><a href="#company" data-en="Company">회사 정보</a></li>
           <li><a class="cta" href="#partner" data-en="Partnership">제휴 문의</a></li>
         </ul>
       </nav>
@@ -324,16 +336,75 @@
       </div>
 
       <div class="stack" role="group" aria-label="3겹 구조">
-        <div class="stack-fig" aria-hidden="true">
-          <div class="ly ly1"></div><div class="ly ly2"></div><div class="ly ly3"></div>
-          <span class="tag" style="top: 14%">1</span><span class="tag" style="top: 46%">2</span><span class="tag" style="top: 78%">3</span>
+        <div class="stack-fig">
+<svg class="layers-real" viewBox="0 0 540 490" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3겹 구조: 윗면 부직포, 가운데 부직포, 방수 필름">
+  <defs>
+    <filter id="f-es" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.95 0.4" numOctaves="4" seed="3" result="n"/>
+      <feColorMatrix in="n" type="matrix" values="0 0 0 0 0.6  0 0 0 0 0.6  0 0 0 0 0.58  0 0 0 0.5 -0.06" result="fib"/>
+      <feFlood flood-color="#F8F7F2" result="base"/>
+      <feComposite in="fib" in2="base" operator="over" result="tex"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="2" seed="8" result="soft"/>
+      <feDiffuseLighting in="soft" surfaceScale="1.6" lighting-color="#ffffff" result="lit"><feDistantLight azimuth="225" elevation="62"/></feDiffuseLighting>
+      <feBlend in="tex" in2="lit" mode="multiply" result="out"/>
+      <feComposite in="out" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="f-puck" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.16 0.08" numOctaves="2" seed="4" result="b"/>
+      <feDiffuseLighting in="b" surfaceScale="3" lighting-color="#ffffff" result="lit"><feDistantLight azimuth="230" elevation="52"/></feDiffuseLighting>
+      <feColorMatrix in="lit" type="matrix" values="0.8 0 0 0 0.18  0 0.81 0 0 0.18  0 0 0.84 0 0.18  0 0 0 1 0" result="out"/>
+      <feComposite in="out" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <filter id="f-sear" x="0" y="0" width="100%" height="100%"><feTurbulence type="turbulence" baseFrequency="0.012 0.11" numOctaves="2" seed="5" result="ridge"/><feDiffuseLighting in="ridge" surfaceScale="4" lighting-color="#ffffff" result="lit"><feDistantLight azimuth="235" elevation="50"/></feDiffuseLighting><feColorMatrix in="lit" type="matrix" values="0.7 0 0 0 0.26  0 0.71 0 0 0.26  0 0 0.74 0 0.27  0 0 0 1 0" result="tint"/><feComposite in="tint" in2="SourceGraphic" operator="in"/></filter>
+    <filter id="f-fine" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="11" result="fine"/>
+      <feColorMatrix in="fine" type="matrix" values="0 0 0 0 0.5  0 0 0 0 0.5  0 0 0 0 0.52  0 0 0 0.18 0" result="fib"/>
+      <feComposite in="fib" in2="SourceGraphic" operator="in"/>
+    </filter>
+    <linearGradient id="g-film" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E9F0F8" stop-opacity="0.95"/>
+      <stop offset="0.5" stop-color="#CCDAEB" stop-opacity="0.88"/>
+      <stop offset="1" stop-color="#B2C5DC" stop-opacity="0.92"/>
+    </linearGradient>
+    <linearGradient id="g-sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#fff" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="g-puff" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8E8B80" stop-opacity="0.16"/><stop offset="0.25" stop-color="#ffffff" stop-opacity="0.18"/><stop offset="0.6" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#8E8B80" stop-opacity="0.18"/></linearGradient>
+    <radialGradient id="g-cell" cx="0.45" cy="0.42" r="0.7"><stop offset="0" stop-color="#ffffff" stop-opacity="0.35"/><stop offset="0.6" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#8E8B80" stop-opacity="0.22"/></radialGradient>
+    <clipPath id="c-sq"><rect x="0" y="0" width="260" height="260" rx="9"/></clipPath>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#1b2233" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow)">
+    <g transform="matrix(0.86,0.36,-0.82,0.34,290,290)">
+      <rect width="260" height="260" rx="9" fill="url(#g-film)" stroke="#9FB2CA" stroke-width="1"/>
+      <g clip-path="url(#c-sq)"><rect x="40" y="-20" width="55" height="300" fill="url(#g-sheen)" transform="rotate(10 67 130)"/><rect x="165" y="-20" width="24" height="300" fill="url(#g-sheen)" opacity="0.6" transform="rotate(10 177 130)"/><g fill="#E2A64B" opacity="0.8"><circle cx="7.1" cy="6.4" r="1.9"/><circle cx="21.6" cy="2.9" r="1.8"/><circle cx="28.7" cy="2.4" r="1.5"/><circle cx="41.4" cy="3.1" r="1.7"/><circle cx="57.1" cy="8.0" r="2.1"/><circle cx="65.5" cy="8.6" r="2.3"/><circle cx="80.2" cy="7.2" r="2.0"/><circle cx="88.9" cy="5.3" r="1.9"/><circle cx="102.0" cy="6.5" r="2.1"/><circle cx="115.2" cy="7.0" r="2.1"/><circle cx="128.8" cy="8.5" r="2.3"/><circle cx="137.6" cy="5.9" r="2.2"/><circle cx="153.4" cy="5.0" r="1.6"/><circle cx="160.9" cy="8.8" r="2.1"/><circle cx="175.7" cy="9.3" r="2.1"/><circle cx="183.9" cy="4.1" r="2.1"/><circle cx="195.1" cy="9.0" r="2.1"/><circle cx="211.0" cy="7.5" r="1.9"/><circle cx="221.6" cy="8.7" r="1.9"/><circle cx="236.7" cy="4.3" r="2.0"/><circle cx="245.5" cy="5.2" r="1.7"/><circle cx="258.6" cy="4.1" r="2.2"/><circle cx="8.3" cy="16.8" r="2.0"/><circle cx="20.7" cy="15.2" r="1.8"/><circle cx="33.0" cy="14.4" r="1.6"/><circle cx="41.3" cy="14.6" r="2.0"/><circle cx="56.9" cy="15.6" r="1.7"/><circle cx="69.2" cy="19.4" r="1.7"/><circle cx="75.2" cy="18.9" r="1.5"/><circle cx="92.2" cy="18.7" r="2.1"/><circle cx="99.3" cy="16.8" r="2.1"/><circle cx="117.3" cy="18.3" r="2.0"/><circle cx="128.0" cy="19.5" r="2.1"/><circle cx="138.7" cy="15.1" r="1.6"/><circle cx="150.8" cy="16.0" r="2.0"/><circle cx="160.2" cy="16.0" r="2.0"/><circle cx="174.9" cy="20.3" r="1.7"/><circle cx="188.9" cy="14.8" r="2.0"/><circle cx="197.3" cy="20.1" r="2.0"/><circle cx="212.2" cy="15.2" r="2.2"/><circle cx="222.0" cy="20.3" r="1.8"/><circle cx="236.6" cy="20.1" r="2.1"/><circle cx="248.9" cy="20.6" r="1.7"/><circle cx="259.6" cy="15.5" r="1.6"/><circle cx="9.2" cy="33.3" r="1.6"/><circle cx="15.0" cy="28.3" r="2.2"/><circle cx="32.7" cy="33.3" r="1.7"/><circle cx="39.8" cy="26.6" r="1.9"/><circle cx="54.4" cy="27.4" r="1.8"/><circle cx="65.9" cy="28.0" r="1.6"/><circle cx="74.7" cy="27.1" r="2.0"/><circle cx="89.8" cy="32.2" r="2.1"/><circle cx="102.1" cy="31.4" r="1.8"/><circle cx="114.8" cy="33.3" r="2.1"/><circle cx="129.3" cy="31.5" r="2.0"/><circle cx="140.2" cy="27.6" r="1.6"/><circle cx="151.6" cy="31.1" r="1.8"/><circle cx="162.3" cy="29.2" r="1.9"/><circle cx="171.3" cy="26.9" r="1.6"/><circle cx="185.0" cy="28.9" r="1.7"/><circle cx="199.0" cy="27.3" r="1.6"/><circle cx="206.4" cy="32.4" r="2.2"/><circle cx="218.7" cy="31.9" r="1.8"/><circle cx="233.3" cy="32.9" r="2.1"/><circle cx="242.5" cy="33.6" r="1.7"/><circle cx="259.0" cy="29.5" r="1.5"/><circle cx="3.6" cy="43.8" r="2.1"/><circle cx="16.2" cy="44.6" r="2.1"/><circle cx="28.7" cy="41.7" r="1.7"/><circle cx="40.2" cy="44.7" r="2.2"/><circle cx="55.3" cy="42.0" r="2.2"/><circle cx="68.3" cy="44.3" r="2.1"/><circle cx="81.4" cy="43.4" r="1.7"/><circle cx="91.5" cy="40.7" r="2.2"/><circle cx="99.6" cy="44.5" r="2.0"/><circle cx="116.3" cy="41.8" r="2.1"/><circle cx="128.4" cy="38.7" r="1.7"/><circle cx="135.8" cy="38.6" r="2.0"/><circle cx="152.2" cy="42.9" r="2.2"/><circle cx="164.6" cy="44.3" r="1.7"/><circle cx="174.4" cy="41.7" r="1.8"/><circle cx="186.3" cy="43.8" r="1.9"/><circle cx="197.2" cy="42.0" r="1.7"/><circle cx="211.5" cy="44.0" r="1.7"/><circle cx="220.2" cy="42.8" r="1.9"/><circle cx="237.2" cy="42.5" r="1.8"/><circle cx="246.7" cy="42.5" r="2.0"/><circle cx="258.5" cy="39.6" r="1.7"/><circle cx="3.3" cy="52.8" r="2.0"/><circle cx="20.7" cy="55.0" r="1.8"/><circle cx="28.9" cy="53.3" r="1.6"/><circle cx="39.5" cy="50.8" r="1.9"/><circle cx="53.1" cy="51.1" r="2.0"/><circle cx="65.3" cy="53.7" r="1.6"/><circle cx="80.4" cy="52.4" r="1.8"/><circle cx="87.3" cy="51.9" r="1.9"/><circle cx="99.8" cy="54.8" r="2.0"/><circle cx="115.8" cy="56.0" r="1.9"/><circle cx="128.6" cy="55.3" r="1.6"/><circle cx="138.9" cy="55.7" r="2.2"/><circle cx="150.6" cy="57.4" r="1.7"/><circle cx="165.6" cy="50.7" r="1.6"/><circle cx="172.6" cy="56.6" r="2.2"/><circle cx="187.6" cy="54.3" r="1.7"/><circle cx="198.2" cy="56.0" r="1.7"/><circle cx="212.2" cy="55.3" r="2.0"/><circle cx="225.2" cy="52.6" r="1.5"/><circle cx="235.7" cy="54.1" r="2.0"/><circle cx="247.4" cy="55.3" r="1.6"/><circle cx="259.5" cy="57.5" r="2.2"/><circle cx="7.3" cy="66.5" r="1.7"/><circle cx="18.9" cy="66.5" r="1.9"/><circle cx="26.6" cy="68.6" r="2.0"/><circle cx="45.4" cy="64.6" r="2.1"/><circle cx="57.2" cy="66.5" r="2.0"/><circle cx="63.8" cy="64.1" r="1.9"/><circle cx="77.5" cy="62.7" r="2.0"/><circle cx="92.0" cy="68.5" r="1.6"/><circle cx="100.6" cy="66.8" r="1.8"/><circle cx="112.7" cy="64.5" r="1.6"/><circle cx="125.1" cy="65.5" r="2.0"/><circle cx="138.0" cy="66.3" r="1.8"/><circle cx="150.9" cy="68.9" r="2.2"/><circle cx="161.7" cy="68.4" r="2.3"/><circle cx="175.1" cy="65.3" r="2.0"/><circle cx="182.8" cy="64.5" r="1.5"/><circle cx="200.5" cy="63.2" r="1.7"/><circle cx="211.2" cy="64.0" r="1.7"/><circle cx="219.4" cy="67.9" r="1.8"/><circle cx="234.9" cy="67.8" r="1.5"/><circle cx="248.3" cy="69.0" r="2.1"/><circle cx="261.3" cy="62.9" r="1.7"/><circle cx="2.7" cy="81.5" r="1.9"/><circle cx="16.4" cy="78.2" r="2.2"/><circle cx="31.5" cy="80.1" r="1.5"/><circle cx="39.2" cy="78.8" r="2.1"/><circle cx="51.0" cy="76.5" r="1.8"/><circle cx="67.9" cy="79.3" r="2.0"/><circle cx="75.5" cy="81.1" r="2.3"/><circle cx="90.9" cy="79.6" r="1.6"/><circle cx="104.8" cy="75.5" r="1.8"/><circle cx="115.4" cy="77.4" r="1.9"/><circle cx="129.5" cy="77.6" r="1.9"/><circle cx="139.2" cy="75.1" r="1.7"/><circle cx="147.7" cy="80.4" r="1.8"/><circle cx="165.6" cy="78.3" r="1.6"/><circle cx="173.8" cy="78.1" r="1.5"/><circle cx="186.3" cy="80.3" r="1.9"/><circle cx="195.9" cy="74.9" r="2.0"/><circle cx="209.5" cy="75.3" r="2.2"/><circle cx="218.5" cy="81.0" r="2.1"/><circle cx="236.8" cy="79.2" r="2.0"/><circle cx="248.5" cy="76.4" r="2.0"/><circle cx="257.8" cy="74.4" r="1.6"/><circle cx="3.0" cy="86.8" r="1.9"/><circle cx="15.3" cy="88.0" r="1.8"/><circle cx="31.1" cy="88.2" r="1.7"/><circle cx="43.6" cy="91.8" r="2.0"/><circle cx="56.6" cy="87.7" r="1.7"/><circle cx="66.3" cy="89.3" r="2.0"/><circle cx="77.3" cy="90.4" r="2.2"/><circle cx="92.5" cy="89.3" r="1.8"/><circle cx="105.4" cy="91.7" r="2.2"/><circle cx="112.1" cy="93.3" r="2.2"/><circle cx="127.5" cy="90.5" r="2.0"/><circle cx="140.8" cy="87.7" r="1.9"/><circle cx="149.6" cy="91.9" r="2.1"/><circle cx="163.4" cy="90.8" r="1.5"/><circle cx="172.5" cy="91.9" r="1.9"/><circle cx="182.6" cy="90.4" r="2.2"/><circle cx="194.5" cy="93.3" r="2.0"/><circle cx="210.3" cy="92.6" r="2.2"/><circle cx="225.0" cy="86.8" r="2.1"/><circle cx="233.0" cy="91.4" r="1.6"/><circle cx="245.4" cy="87.0" r="1.8"/><circle cx="257.1" cy="88.7" r="1.8"/><circle cx="2.5" cy="101.3" r="1.8"/><circle cx="20.2" cy="104.3" r="1.6"/><circle cx="29.6" cy="102.5" r="2.0"/><circle cx="39.4" cy="99.2" r="1.8"/><circle cx="50.7" cy="100.4" r="2.0"/><circle cx="63.7" cy="105.4" r="2.2"/><circle cx="78.4" cy="99.5" r="1.8"/><circle cx="91.4" cy="100.4" r="1.9"/><circle cx="100.6" cy="101.2" r="1.7"/><circle cx="110.5" cy="100.0" r="2.0"/><circle cx="127.1" cy="98.6" r="2.2"/><circle cx="135.0" cy="99.2" r="2.1"/><circle cx="151.3" cy="103.3" r="2.0"/><circle cx="165.2" cy="98.8" r="1.7"/><circle cx="171.6" cy="101.0" r="1.8"/><circle cx="183.9" cy="98.6" r="1.6"/><circle cx="198.1" cy="105.4" r="1.6"/><circle cx="210.1" cy="102.9" r="1.6"/><circle cx="225.0" cy="103.3" r="2.1"/><circle cx="237.2" cy="103.4" r="1.6"/><circle cx="245.2" cy="101.6" r="1.7"/><circle cx="255.5" cy="101.3" r="2.1"/><circle cx="7.0" cy="115.3" r="2.1"/><circle cx="20.5" cy="114.3" r="1.5"/><circle cx="28.9" cy="117.3" r="2.0"/><circle cx="43.7" cy="116.4" r="1.8"/><circle cx="55.9" cy="113.0" r="1.9"/><circle cx="62.5" cy="114.4" r="1.5"/><circle cx="78.1" cy="113.9" r="1.8"/><circle cx="87.5" cy="114.0" r="1.7"/><circle cx="102.2" cy="111.1" r="1.5"/><circle cx="115.9" cy="114.4" r="2.1"/><circle cx="128.6" cy="115.2" r="2.1"/><circle cx="140.4" cy="113.2" r="2.2"/><circle cx="149.1" cy="113.1" r="1.5"/><circle cx="159.0" cy="111.1" r="1.5"/><circle cx="174.6" cy="115.3" r="1.7"/><circle cx="182.4" cy="110.7" r="2.0"/><circle cx="201.4" cy="116.8" r="2.1"/><circle cx="213.2" cy="115.7" r="1.9"/><circle cx="222.9" cy="110.9" r="1.8"/><circle cx="233.8" cy="114.2" r="1.9"/><circle cx="246.7" cy="115.0" r="1.9"/><circle cx="259.6" cy="112.8" r="2.2"/><circle cx="2.5" cy="122.7" r="2.0"/><circle cx="21.5" cy="123.9" r="1.5"/><circle cx="28.0" cy="122.7" r="1.9"/><circle cx="43.3" cy="126.8" r="1.8"/><circle cx="56.5" cy="122.7" r="2.2"/><circle cx="68.7" cy="125.6" r="1.8"/><circle cx="75.9" cy="127.0" r="1.6"/><circle cx="88.5" cy="127.2" r="1.6"/><circle cx="102.5" cy="129.1" r="1.5"/><circle cx="116.9" cy="124.2" r="2.0"/><circle cx="122.6" cy="128.8" r="2.0"/><circle cx="136.2" cy="126.8" r="1.8"/><circle cx="150.1" cy="125.4" r="2.3"/><circle cx="164.3" cy="129.3" r="2.2"/><circle cx="170.8" cy="124.3" r="1.9"/><circle cx="186.3" cy="123.3" r="2.0"/><circle cx="196.1" cy="125.2" r="2.0"/><circle cx="212.5" cy="124.9" r="1.6"/><circle cx="219.6" cy="124.1" r="1.6"/><circle cx="237.0" cy="127.7" r="2.0"/><circle cx="248.4" cy="122.9" r="2.0"/><circle cx="260.7" cy="123.4" r="1.9"/><circle cx="5.0" cy="140.0" r="2.0"/><circle cx="21.3" cy="134.7" r="1.6"/><circle cx="32.6" cy="140.5" r="2.0"/><circle cx="39.2" cy="138.0" r="1.9"/><circle cx="55.8" cy="139.1" r="1.7"/><circle cx="63.0" cy="135.1" r="1.8"/><circle cx="81.1" cy="139.2" r="2.1"/><circle cx="93.0" cy="140.6" r="2.1"/><circle cx="100.8" cy="139.3" r="2.1"/><circle cx="115.6" cy="138.1" r="2.0"/><circle cx="127.5" cy="138.6" r="1.7"/><circle cx="140.8" cy="139.6" r="1.7"/><circle cx="149.1" cy="135.4" r="2.2"/><circle cx="160.0" cy="137.0" r="2.2"/><circle cx="175.5" cy="139.7" r="1.6"/><circle cx="187.2" cy="140.2" r="1.5"/><circle cx="199.7" cy="137.3" r="1.7"/><circle cx="206.5" cy="136.0" r="1.9"/><circle cx="225.5" cy="138.7" r="2.0"/><circle cx="230.7" cy="137.4" r="1.7"/><circle cx="249.3" cy="135.1" r="1.7"/><circle cx="259.0" cy="136.4" r="2.2"/><circle cx="3.5" cy="148.1" r="2.2"/><circle cx="17.4" cy="153.5" r="1.7"/><circle cx="26.7" cy="152.3" r="1.8"/><circle cx="41.1" cy="152.9" r="2.0"/><circle cx="55.5" cy="151.2" r="1.8"/><circle cx="68.8" cy="151.7" r="1.5"/><circle cx="78.2" cy="146.8" r="1.9"/><circle cx="88.9" cy="151.6" r="1.9"/><circle cx="98.5" cy="153.3" r="2.2"/><circle cx="116.0" cy="150.1" r="2.0"/><circle cx="126.3" cy="151.3" r="2.1"/><circle cx="136.7" cy="151.3" r="2.2"/><circle cx="151.5" cy="151.7" r="2.1"/><circle cx="163.4" cy="152.6" r="1.6"/><circle cx="174.3" cy="149.3" r="2.2"/><circle cx="183.5" cy="151.7" r="1.8"/><circle cx="198.2" cy="149.7" r="1.5"/><circle cx="211.2" cy="146.9" r="1.9"/><circle cx="219.1" cy="146.7" r="1.7"/><circle cx="234.5" cy="151.4" r="2.2"/><circle cx="243.9" cy="146.8" r="1.8"/><circle cx="254.8" cy="152.9" r="2.2"/><circle cx="6.3" cy="165.2" r="2.3"/><circle cx="20.5" cy="159.8" r="2.1"/><circle cx="30.1" cy="165.5" r="1.7"/><circle cx="44.6" cy="159.5" r="2.3"/><circle cx="53.4" cy="162.0" r="1.5"/><circle cx="64.1" cy="162.0" r="2.1"/><circle cx="80.6" cy="161.1" r="1.9"/><circle cx="92.2" cy="162.0" r="2.3"/><circle cx="103.2" cy="161.7" r="1.9"/><circle cx="112.9" cy="160.7" r="1.5"/><circle cx="126.0" cy="161.0" r="1.8"/><circle cx="140.2" cy="162.3" r="2.2"/><circle cx="147.3" cy="160.1" r="2.1"/><circle cx="160.3" cy="162.6" r="1.8"/><circle cx="175.3" cy="162.0" r="1.8"/><circle cx="183.3" cy="161.3" r="1.9"/><circle cx="199.8" cy="159.2" r="2.1"/><circle cx="207.4" cy="164.9" r="1.8"/><circle cx="222.7" cy="162.3" r="1.9"/><circle cx="234.5" cy="158.4" r="1.9"/><circle cx="248.9" cy="161.7" r="2.1"/><circle cx="258.0" cy="158.7" r="1.9"/><circle cx="5.6" cy="177.4" r="1.8"/><circle cx="17.2" cy="171.9" r="1.6"/><circle cx="29.5" cy="175.9" r="1.7"/><circle cx="45.5" cy="171.9" r="1.7"/><circle cx="56.7" cy="174.8" r="2.2"/><circle cx="68.4" cy="176.8" r="1.8"/><circle cx="76.2" cy="174.0" r="1.7"/><circle cx="91.7" cy="175.0" r="1.8"/><circle cx="104.1" cy="174.5" r="2.3"/><circle cx="110.9" cy="176.5" r="2.0"/><circle cx="126.8" cy="172.7" r="1.8"/><circle cx="140.2" cy="177.5" r="2.0"/><circle cx="150.7" cy="176.1" r="1.7"/><circle cx="162.6" cy="173.1" r="2.2"/><circle cx="175.3" cy="176.8" r="1.7"/><circle cx="187.8" cy="176.3" r="1.6"/><circle cx="199.4" cy="176.5" r="2.0"/><circle cx="206.5" cy="171.3" r="1.9"/><circle cx="222.7" cy="170.5" r="1.6"/><circle cx="236.7" cy="174.2" r="1.6"/><circle cx="246.7" cy="175.0" r="1.5"/><circle cx="258.4" cy="172.3" r="1.8"/><circle cx="5.0" cy="186.6" r="1.9"/><circle cx="20.3" cy="183.7" r="2.2"/><circle cx="29.7" cy="186.0" r="2.2"/><circle cx="43.0" cy="188.5" r="1.6"/><circle cx="57.3" cy="183.1" r="2.1"/><circle cx="65.2" cy="183.9" r="2.0"/><circle cx="78.3" cy="187.5" r="1.6"/><circle cx="92.8" cy="185.2" r="2.1"/><circle cx="104.1" cy="187.4" r="2.0"/><circle cx="116.7" cy="183.4" r="1.9"/><circle cx="128.6" cy="187.5" r="1.7"/><circle cx="137.0" cy="188.2" r="1.9"/><circle cx="148.3" cy="187.1" r="2.0"/><circle cx="162.7" cy="184.5" r="2.2"/><circle cx="177.3" cy="183.9" r="2.1"/><circle cx="189.3" cy="188.6" r="1.7"/><circle cx="196.0" cy="183.3" r="1.8"/><circle cx="211.4" cy="189.1" r="1.5"/><circle cx="224.6" cy="186.0" r="1.6"/><circle cx="230.7" cy="185.5" r="2.0"/><circle cx="242.4" cy="185.2" r="1.8"/><circle cx="256.6" cy="185.6" r="2.1"/><circle cx="4.1" cy="194.4" r="2.3"/><circle cx="20.1" cy="199.5" r="2.2"/><circle cx="29.2" cy="195.8" r="1.8"/><circle cx="38.7" cy="199.7" r="2.3"/><circle cx="57.6" cy="195.8" r="1.9"/><circle cx="66.5" cy="197.2" r="1.7"/><circle cx="80.2" cy="199.9" r="1.8"/><circle cx="86.6" cy="198.7" r="1.7"/><circle cx="100.2" cy="201.1" r="2.0"/><circle cx="116.8" cy="194.6" r="2.1"/><circle cx="127.2" cy="199.6" r="1.5"/><circle cx="136.9" cy="199.8" r="1.9"/><circle cx="153.0" cy="195.4" r="1.8"/><circle cx="158.5" cy="195.9" r="2.0"/><circle cx="176.3" cy="195.1" r="2.2"/><circle cx="185.7" cy="196.6" r="1.9"/><circle cx="196.5" cy="200.1" r="1.7"/><circle cx="208.9" cy="197.3" r="1.6"/><circle cx="219.8" cy="196.4" r="2.3"/><circle cx="237.4" cy="195.2" r="2.0"/><circle cx="246.4" cy="199.0" r="2.0"/><circle cx="255.0" cy="201.1" r="2.1"/><circle cx="4.4" cy="212.1" r="2.2"/><circle cx="15.1" cy="211.6" r="2.1"/><circle cx="29.4" cy="208.8" r="2.1"/><circle cx="45.2" cy="212.5" r="2.2"/><circle cx="56.8" cy="208.7" r="1.8"/><circle cx="63.2" cy="209.5" r="1.6"/><circle cx="74.5" cy="213.5" r="2.2"/><circle cx="92.7" cy="213.1" r="1.8"/><circle cx="103.1" cy="210.7" r="2.1"/><circle cx="111.9" cy="207.2" r="2.3"/><circle cx="129.5" cy="212.2" r="1.7"/><circle cx="141.4" cy="209.6" r="1.9"/><circle cx="151.0" cy="208.3" r="2.3"/><circle cx="160.0" cy="206.5" r="1.6"/><circle cx="173.2" cy="211.4" r="1.8"/><circle cx="187.4" cy="211.5" r="1.6"/><circle cx="200.0" cy="207.8" r="1.7"/><circle cx="212.3" cy="209.6" r="1.6"/><circle cx="218.6" cy="208.1" r="1.7"/><circle cx="233.2" cy="211.3" r="2.1"/><circle cx="246.9" cy="208.3" r="1.7"/><circle cx="256.2" cy="211.1" r="1.6"/><circle cx="3.2" cy="218.6" r="1.9"/><circle cx="18.7" cy="219.7" r="2.0"/><circle cx="29.5" cy="219.8" r="1.6"/><circle cx="39.5" cy="223.9" r="1.9"/><circle cx="57.1" cy="223.8" r="2.1"/><circle cx="63.6" cy="219.9" r="1.7"/><circle cx="75.9" cy="221.2" r="2.2"/><circle cx="87.9" cy="221.3" r="2.1"/><circle cx="102.4" cy="219.0" r="2.2"/><circle cx="112.6" cy="220.4" r="1.8"/><circle cx="123.9" cy="222.7" r="2.0"/><circle cx="140.1" cy="223.9" r="1.5"/><circle cx="147.2" cy="219.7" r="1.7"/><circle cx="164.9" cy="223.8" r="1.6"/><circle cx="176.7" cy="225.3" r="2.2"/><circle cx="188.5" cy="223.3" r="2.0"/><circle cx="199.0" cy="224.3" r="1.9"/><circle cx="212.5" cy="219.5" r="1.7"/><circle cx="220.5" cy="220.9" r="1.9"/><circle cx="232.5" cy="219.0" r="1.7"/><circle cx="243.7" cy="223.7" r="1.6"/><circle cx="257.9" cy="224.6" r="1.7"/><circle cx="3.6" cy="237.3" r="2.2"/><circle cx="21.5" cy="232.8" r="1.6"/><circle cx="29.9" cy="231.4" r="1.7"/><circle cx="43.1" cy="233.9" r="1.7"/><circle cx="52.3" cy="232.9" r="1.9"/><circle cx="68.2" cy="233.6" r="1.5"/><circle cx="79.9" cy="230.9" r="2.0"/><circle cx="88.4" cy="230.5" r="2.1"/><circle cx="103.5" cy="232.0" r="2.0"/><circle cx="113.6" cy="231.5" r="2.2"/><circle cx="128.3" cy="232.5" r="2.1"/><circle cx="138.0" cy="234.3" r="2.1"/><circle cx="152.0" cy="230.9" r="2.1"/><circle cx="165.4" cy="236.5" r="1.7"/><circle cx="177.3" cy="235.4" r="2.2"/><circle cx="184.6" cy="232.7" r="2.3"/><circle cx="196.7" cy="235.0" r="2.3"/><circle cx="212.4" cy="234.9" r="1.6"/><circle cx="220.0" cy="237.2" r="1.8"/><circle cx="230.4" cy="233.9" r="1.7"/><circle cx="247.6" cy="232.4" r="1.6"/><circle cx="258.2" cy="234.1" r="1.7"/><circle cx="2.7" cy="245.3" r="2.1"/><circle cx="20.2" cy="248.3" r="1.8"/><circle cx="28.8" cy="248.4" r="1.8"/><circle cx="39.0" cy="244.0" r="2.0"/><circle cx="54.9" cy="248.1" r="1.8"/><circle cx="66.7" cy="243.7" r="1.7"/><circle cx="80.5" cy="246.7" r="1.9"/><circle cx="89.3" cy="249.3" r="1.8"/><circle cx="99.7" cy="246.0" r="2.3"/><circle cx="116.8" cy="246.0" r="2.1"/><circle cx="124.1" cy="246.8" r="2.1"/><circle cx="137.2" cy="243.8" r="2.1"/><circle cx="153.5" cy="245.1" r="1.8"/><circle cx="165.0" cy="248.1" r="1.7"/><circle cx="172.7" cy="245.8" r="2.2"/><circle cx="186.8" cy="248.5" r="2.0"/><circle cx="199.1" cy="246.8" r="1.8"/><circle cx="211.1" cy="243.6" r="1.7"/><circle cx="223.2" cy="243.5" r="2.1"/><circle cx="235.0" cy="248.1" r="2.1"/><circle cx="244.0" cy="246.4" r="1.8"/><circle cx="255.6" cy="248.5" r="2.1"/><circle cx="9.0" cy="258.0" r="2.0"/><circle cx="20.5" cy="261.1" r="1.8"/><circle cx="27.2" cy="260.3" r="2.0"/><circle cx="41.6" cy="256.7" r="1.6"/><circle cx="56.3" cy="257.1" r="2.2"/><circle cx="63.4" cy="258.5" r="1.6"/><circle cx="75.9" cy="257.6" r="2.1"/><circle cx="92.3" cy="258.1" r="2.2"/><circle cx="103.3" cy="257.1" r="2.1"/><circle cx="116.6" cy="261.0" r="2.0"/><circle cx="128.8" cy="255.3" r="1.6"/><circle cx="141.5" cy="259.5" r="1.7"/><circle cx="153.3" cy="260.7" r="2.2"/><circle cx="164.3" cy="255.3" r="1.9"/><circle cx="175.1" cy="260.6" r="1.8"/><circle cx="188.9" cy="258.3" r="2.1"/><circle cx="198.1" cy="256.5" r="2.0"/><circle cx="211.4" cy="257.7" r="2.2"/><circle cx="222.1" cy="254.9" r="1.9"/><circle cx="237.3" cy="256.2" r="1.9"/><circle cx="242.9" cy="258.8" r="2.2"/><circle cx="255.2" cy="254.7" r="2.2"/></g></g>
+    </g>
+  </g>
+  <g filter="url(#shadow)">
+    <g transform="matrix(0.86,0.36,-0.82,0.34,290,155)"><g clip-path="url(#c-sq)"><rect width="260" height="260" fill="#E9ECF2" filter="url(#f-sear)"/><rect x="0" y="0" width="11" height="260" fill="#F1F3F6" opacity="0.45"/><rect x="11" y="0" width="11" height="260" fill="#E3E7EE" filter="url(#f-puck)" opacity="0.6"/><rect x="22" y="0" width="11" height="260" fill="#F1F3F6" opacity="0.45"/><rect x="33" y="0" width="11" height="260" fill="#E3E7EE" filter="url(#f-puck)" opacity="0.6"/><rect x="44" y="0" width="11" height="260" fill="#F1F3F6" opacity="0.45"/><rect x="55" y="0" width="11" height="260" fill="#E3E7EE" filter="url(#f-puck)" opacity="0.6"/><rect x="66" y="0" width="11" height="260" fill="#F1F3F6" opacity="0.45"/><rect x="77" y="0" width="11" height="260" fill="#E3E7EE" filter="url(#f-puck)" opacity="0.6"/><rect x="88" y="0" width="11" height="260" fill="#F1F3F6" opacity="0.45"/><rect x="99" y="0" width="11" height="260" fill="#E3E7EE" filter="url(#f-puck)" opacity="0.6"/><rect x="110" y="0" width="11" height="260" fill="#F1F3F6" opacity="0.45"/><rect x="121" y="0" width="11" height="260" fill="#E3E7EE" filter="url(#f-puck)" opacity="0.6"/><rect x="132" y="0" width="11" height="260" fill="#F1F3F6" opacity="0.45"/><rect x="143" y="0" width="11" height="260" fill="#E3E7EE" filter="url(#f-puck)" opacity="0.6"/><rect x="154" y="0" width="11" height="260" fill="#F1F3F6" opacity="0.45"/><rect x="165" y="0" width="11" height="260" fill="#E3E7EE" filter="url(#f-puck)" opacity="0.6"/><rect x="176" y="0" width="11" height="260" fill="#F1F3F6" opacity="0.45"/><rect x="187" y="0" width="11" height="260" fill="#E3E7EE" filter="url(#f-puck)" opacity="0.6"/><rect x="198" y="0" width="11" height="260" fill="#F1F3F6" opacity="0.45"/><rect x="209" y="0" width="11" height="260" fill="#E3E7EE" filter="url(#f-puck)" opacity="0.6"/><rect x="220" y="0" width="11" height="260" fill="#F1F3F6" opacity="0.45"/><rect x="231" y="0" width="11" height="260" fill="#E3E7EE" filter="url(#f-puck)" opacity="0.6"/><rect x="242" y="0" width="11" height="260" fill="#F1F3F6" opacity="0.45"/><rect x="253" y="0" width="11" height="260" fill="#E3E7EE" filter="url(#f-puck)" opacity="0.6"/><rect width="260" height="260" fill="#fff" filter="url(#f-fine)"/><line x1="65" y1="5" x2="65" y2="255" stroke="#A3AAB8" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="3.5 4" opacity="0.9"/><line x1="5" y1="65" x2="255" y2="65" stroke="#A3AAB8" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="3.5 4" opacity="0.9"/><line x1="130" y1="5" x2="130" y2="255" stroke="#A3AAB8" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="3.5 4" opacity="0.9"/><line x1="5" y1="130" x2="255" y2="130" stroke="#A3AAB8" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="3.5 4" opacity="0.9"/><line x1="195" y1="5" x2="195" y2="255" stroke="#A3AAB8" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="3.5 4" opacity="0.9"/><line x1="5" y1="195" x2="255" y2="195" stroke="#A3AAB8" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="3.5 4" opacity="0.9"/></g><rect width="260" height="260" rx="9" fill="none" stroke="#C9CED8" stroke-width="1"/></g>
+  </g>
+  <g filter="url(#shadow)">
+    <g transform="matrix(0.86,0.36,-0.82,0.34,290,20)"><rect width="260" height="260" rx="9" fill="#F8F7F2" filter="url(#f-es)"/><g clip-path="url(#c-sq)"><rect x="0" y="0" width="65" height="65" fill="url(#g-cell)"/><rect x="65" y="0" width="65" height="65" fill="url(#g-cell)"/><rect x="130" y="0" width="65" height="65" fill="url(#g-cell)"/><rect x="195" y="0" width="65" height="65" fill="url(#g-cell)"/><rect x="0" y="65" width="65" height="65" fill="url(#g-cell)"/><rect x="65" y="65" width="65" height="65" fill="url(#g-cell)"/><rect x="130" y="65" width="65" height="65" fill="url(#g-cell)"/><rect x="195" y="65" width="65" height="65" fill="url(#g-cell)"/><rect x="0" y="130" width="65" height="65" fill="url(#g-cell)"/><rect x="65" y="130" width="65" height="65" fill="url(#g-cell)"/><rect x="130" y="130" width="65" height="65" fill="url(#g-cell)"/><rect x="195" y="130" width="65" height="65" fill="url(#g-cell)"/><rect x="0" y="195" width="65" height="65" fill="url(#g-cell)"/><rect x="65" y="195" width="65" height="65" fill="url(#g-cell)"/><rect x="130" y="195" width="65" height="65" fill="url(#g-cell)"/><rect x="195" y="195" width="65" height="65" fill="url(#g-cell)"/><line x1="65" y1="5" x2="65" y2="255" stroke="#A9A79E" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="3.5 4"/><line x1="5" y1="65" x2="255" y2="65" stroke="#A9A79E" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="3.5 4"/><line x1="130" y1="5" x2="130" y2="255" stroke="#A9A79E" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="3.5 4"/><line x1="5" y1="130" x2="255" y2="130" stroke="#A9A79E" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="3.5 4"/><line x1="195" y1="5" x2="195" y2="255" stroke="#A9A79E" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="3.5 4"/><line x1="5" y1="195" x2="255" y2="195" stroke="#A9A79E" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="3.5 4"/></g><rect width="260" height="260" rx="9" fill="none" stroke="#D6D4CB" stroke-width="1"/></g>
+  </g>
+  <g font-family="IBM Plex Mono, monospace" font-size="14" font-weight="600" text-anchor="middle">
+    <circle cx="26" cy="108" r="14" fill="#24272C"/><text x="26" y="113" fill="#fff">1</text><line x1="40" y1="108" x2="70" y2="108" stroke="#24272C" stroke-width="1.2"/>
+    <circle cx="26" cy="243" r="14" fill="#24272C"/><text x="26" y="248" fill="#fff">2</text><line x1="40" y1="243" x2="70" y2="243" stroke="#24272C" stroke-width="1.2"/>
+    <circle cx="26" cy="378" r="14" fill="#24272C"/><text x="26" y="383" fill="#fff">3</text><line x1="40" y1="378" x2="70" y2="378" stroke="#24272C" stroke-width="1.2"/>
+  </g>
+</svg>
         </div>
         <ol class="stack-legend">
           <li><span class="num">1</span><div><strong data-en="Top nonwoven">윗면 부직포</strong><span class="d" data-en="Touches the skin · ES through-air nonwoven">피부에 닿는 면 · ES 열풍 부직포</span></div></li>
-          <li><span class="num">2</span><div><strong data-en="Middle nonwoven">가운데 부직포</strong><span class="d" data-en="Textured layer under the top · 3D patterned spunlace">윗면을 받치는 요철 층 · 입체 무늬 스펀레이스</span></div></li>
+          <li class="bond"><span class="quilt" aria-hidden="true"></span><div><strong data-en="1 + 2: grid quilting">1·2층 붙이기: 격자 누빔</strong><span class="d" data-en="Ultrasonic grid quilting, about 10–20 cm squares, so each square keeps its texture">약 10~20cm 격자로 초음파 누빔해, 칸마다 요철이 살아 있게 붙입니다</span></div></li>
+          <li><span class="num">2</span><div><strong data-en="Middle nonwoven">가운데 부직포</strong><span class="d" data-en="Seersucker-like textured layer under the top · 3D patterned spunlace">윗면을 받치는 시어서커 같은 요철 층 · 입체 무늬 스펀레이스</span></div></li>
+          <li class="bond"><span class="glue dense" aria-hidden="true"></span><div><strong data-en="2 + 3: firm bond">2·3층 붙이기: 확실하게</strong><span class="d" data-en="Hot-melt sprayed densely so the film stays attached, even with oils">핫멜트를 촘촘히 뿌려, 오일이 닿아도 필름이 떨어지지 않게 붙입니다</span></div></li>
           <li><span class="num">3</span><div><strong data-en="Waterproof film">방수 필름</strong><span class="d" data-en="Blocks liquids · non-porous film">액체를 막는 바닥 · 무공 필름</span></div></li>
         </ol>
-        <p class="stack-note" data-en="The three layers are laminated into one sheet about 270 × 150 cm, with side flaps tucked under the mattress.">세 층을 하나로 합지해 약 270 × 150cm 시트로 만들고, 양 끝에는 매트리스 아래로 넣는 날개를 붙입니다.</p>
+        <p class="stack-note" data-en="Layers 1 and 2 are grid-quilted, and layers 2 and 3 are bonded with spray hot-melt (orange dots), making one sheet about 270 × 150 cm, with side flaps tucked under the mattress.">1·2층은 격자로 누비고, 2·3층은 스프레이 핫멜트(주황색 점)로 붙여 약 270 × 150cm 시트로 만들고, 양 끝에는 매트리스 아래로 넣는 날개를 붙입니다.</p>
       </div>
 
       <h3 class="spec-group" data-en="Materials by layer">층별 소재</h3>
@@ -343,10 +414,10 @@
           <p class="what" data-en="Top layer that touches the skin">피부에 직접 닿는 윗면 소재</p>
           <dl>
             <div><dt data-en="Type">종류</dt><dd data-en="ES through-air bonded nonwoven, hydrophilic">ES 열풍 부직포(에어스루), 친수 처리</dd></div>
+            <div><dt data-en="Fibre">원료</dt><dd data-en="PE/PET bicomponent (ES) fibre">PE·PET 이성분 섬유 (ES 섬유)</dd></div>
             <div><dt data-en="Weight">평량</dt><dd>25–30 gsm</dd></div>
             <div><dt data-en="Width">폭</dt><dd data-en="150 cm or more">150cm 이상</dd></div>
-            <div><dt data-en="Surface">표면</dt><dd data-en="No thermal point-bonding marks, low-lint grade">열 엠보(점 무늬) 자국 없는 원단, 저보풀 등급</dd></div>
-            <div><dt data-en="Safety">안전</dt><dd data-en="No fluorescent whitener or fragrance; OEKO-TEX preferred">형광증백제·향료 무첨가, OEKO-TEX 인증 우대</dd></div>
+            <div><dt data-en="Need">조건</dt><dd data-en="No thermal point-bonding marks, low-lint grade, no fluorescent whitener or fragrance (OEKO-TEX preferred)">열 엠보(점 무늬) 자국 없음, 저보풀 등급, 형광증백제·향료 무첨가 (OEKO-TEX 인증 우대)</dd></div>
             <div><dt data-en="Also">비교</dt><dd data-en="Plain spunlace 30 gsm (viscose/PET, lyocell)">플레인 스펀레이스 30gsm (레이온·PET, 라이오셀)</dd></div>
             <div><dt data-en="Data">자료</dt><dd data-en="Tensile strength (MD/CD), fibre fineness, lint test">인장강도(가로·세로), 섬유 굵기, 보풀 시험</dd></div>
           </dl>
@@ -354,7 +425,7 @@
 
         <div class="spec-card">
           <h3><span class="num">2</span><span data-en="Middle nonwoven">가운데 부직포</span></h3>
-          <p class="what" data-en="Textured layer under the top layer">윗면 아래에 받치는 요철 소재</p>
+          <p class="what" data-en="Seersucker-like textured layer under the top layer">윗면 아래에 받치는 시어서커 같은 요철 소재</p>
           <dl>
             <div><dt data-en="Type">종류</dt><dd data-en="Jacquard / 3D textured spunlace">입체(요철) 무늬 스펀레이스</dd></div>
             <div><dt data-en="Fibre">원료</dt><dd data-en="Viscose/PET 30:70 or 100% PET">레이온·PET 30:70 또는 PET 100%</dd></div>
@@ -371,9 +442,11 @@
           <p class="what" data-en="Bottom layer that blocks liquids">액체를 막는 바닥면 소재</p>
           <dl>
             <div><dt data-en="Type">종류</dt><dd data-en="Non-porous film">구멍 없는 무공 필름</dd></div>
-            <div><dt data-en="Options">후보</dt><dd data-en="Soft PE 15–20 µm, PEVA 20–35 µm, TPU 20–25 µm (polyether, Shore 80–85A)">부드러운 PE 15–20㎛, PEVA 20–35㎛, TPU 20–25㎛ (폴리에테르, Shore 80–85A)</dd></div>
+            <div><dt data-en="Material">원료</dt><dd data-en="Soft PE, PEVA, TPU (polyether, Shore 80–85A)">부드러운 PE, PEVA, TPU (폴리에테르, Shore 80–85A)</dd></div>
+            <div><dt data-en="Thickness">두께</dt><dd data-en="PE 15–20 µm, PEVA 20–35 µm, TPU 20–25 µm">PE 15–20㎛, PEVA 20–35㎛, TPU 20–25㎛</dd></div>
             <div><dt data-en="Width">폭</dt><dd data-en="150 cm or more">150cm 이상</dd></div>
-            <div><dt data-en="Surface">표면</dt><dd data-en="Matte or embossed, low noise">무광 또는 엠보, 저소음</dd></div>
+            <div><dt data-en="Need">조건</dt><dd data-en="Matte or embossed, low noise">무광 또는 엠보, 저소음</dd></div>
+            <div><dt data-en="Also">비교</dt><dd data-en="The three materials above, compared under the same conditions">위 세 가지 원료를 같은 조건으로 비교</dd></div>
             <div><dt data-en="Data">자료</dt><dd data-en="Hydrostatic head, water vapour transmission (with test method), resistance to oils and lubricants">내수압, 투습도(시험법 포함), 오일·윤활제 저항성</dd></div>
           </dl>
         </div>
@@ -386,7 +459,8 @@
           <h3 data-en="Side nonwoven">날개용 부직포</h3>
           <p class="what" data-en="Edge material tucked under the mattress">매트리스 아래로 접어 넣는 가장자리 소재</p>
           <dl>
-            <div><dt data-en="Type">종류</dt><dd data-en="100% PET plain spunlace, hydrophobic">PET 100% 플레인 스펀레이스, 소수성</dd></div>
+            <div><dt data-en="Type">종류</dt><dd data-en="Plain spunlace, hydrophobic">플레인 스펀레이스, 소수성</dd></div>
+            <div><dt data-en="Fibre">원료</dt><dd data-en="100% PET">PET 100%</dd></div>
             <div><dt data-en="Weight">평량</dt><dd>25–30 gsm</dd></div>
             <div><dt data-en="Width">폭</dt><dd data-en="150 cm or more">150cm 이상</dd></div>
             <div><dt data-en="Also">비교</dt><dd data-en="Hydrophobic PP spunbond 15–20 gsm">소수성 PP 스펀본드 15–20gsm</dd></div>
@@ -399,7 +473,8 @@
           <p class="what" data-en="Making sheets from materials we supply">저희가 공급하는 원단으로 시트를 만드는 공정</p>
           <dl>
             <div><dt data-en="Basis">방식</dt><dd data-en="Toll processing with materials we supply">원단 사급 임가공</dd></div>
-            <div><dt data-en="Lamination">합지</dt><dd data-en="Three-layer spray hot-melt, 150 cm or wider">3겹 스프레이 핫멜트, 폭 150cm 이상</dd></div>
+            <div><dt data-en="Quilting">누빔</dt><dd data-en="Layers 1 and 2: ultrasonic grid quilting, about 10–20 cm squares, 150 cm or wider">1·2층: 초음파 격자 누빔 (약 10~20cm 칸), 폭 150cm 이상</dd></div>
+            <div><dt data-en="Lamination">합지</dt><dd data-en="Layers 2 and 3: spray hot-melt (no quilting through the film)">2·3층: 스프레이 핫멜트 (필름은 누비지 않음)</dd></div>
             <div><dt data-en="Need">조건</dt><dd data-en="No pressed marks on the surface; low pressure so the middle texture stays">표면 눌림 자국 없이, 가운데 요철이 유지되도록 낮은 압력</dd></div>
             <div><dt data-en="Finishing">가공</dt><dd data-en="Heat-sealed edges">테두리 열융착</dd></div>
             <div><dt data-en="Cutting">재단</dt><dd data-en="Large sheets about 270 cm long">길이 약 270cm 대형 시트</dd></div>
@@ -479,8 +554,8 @@
     <div class="wrap two">
       <div>
         <p class="label" data-en="Company">Company</p>
-        <h2 id="company-title" data-en="Company information &amp; location">회사 정보·오시는 길</h2>
-        <p class="muted" data-en="Visits are by appointment. Please contact us by email beforehand.">방문은 사전 예약으로 가능합니다. 메일로 먼저 연락해 주세요.</p>
+        <h2 id="company-title" data-en="Company information">회사 정보</h2>
+        <p class="muted" data-en="Our registered office is not staffed, so we do not take visits there. If you would like to meet, please email us and we will visit you or talk by phone.">본점은 상주하는 사무실이 아니어서 방문 상담은 받지 않습니다. 미팅이 필요하시면 메일로 연락해 주세요. 저희가 찾아뵙거나 유선으로 진행하겠습니다.</p>
       </div>
       <dl class="info">
         <div><dt data-en="Company">상호</dt><dd data-en="DKVEST Co., Ltd.">디케이베스트 주식회사 (DKVEST Co., Ltd.)</dd></div>
@@ -488,7 +563,7 @@
         <div><dt data-en="Founded">설립일</dt><dd>2025-09-03</dd></div>
         <div><dt data-en="Business reg. no.">사업자등록번호</dt><dd>187-81-03832</dd></div>
         <div><dt data-en="Corporate reg. no.">법인등록번호</dt><dd>130111-0126641</dd></div>
-        <div><dt data-en="Address">주소</dt><dd><span data-en="604-G84, Leaders Plaza, 1068 Hyohaeng-ro, Hwaseong-si, Gyeonggi-do 18383, Korea">경기도 화성시 효행로 1068, 604-G84호 (병점동, 리더스프라자)</span> · <a href="https://map.naver.com/p/search/%EA%B2%BD%EA%B8%B0%EB%8F%84%20%ED%99%94%EC%84%B1%EC%8B%9C%20%ED%9A%A8%ED%96%89%EB%A1%9C%201068" target="_blank" rel="noopener" data-en="Map">지도 보기</a></dd></div>
+        <div><dt data-en="Registered office">본점 주소</dt><dd><span data-en="604-G84, Leaders Plaza, 1068 Hyohaeng-ro, Hwaseong-si, Gyeonggi-do 18383, Korea">경기도 화성시 효행로 1068, 604-G84호 (병점동, 리더스프라자)</span></dd></div>
         <div><dt data-en="Email">이메일</dt><dd><a href="mailto:contact@dkvest.com">contact@dkvest.com</a></dd></div>
       </dl>
     </div>

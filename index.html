@@ -154,6 +154,25 @@
   .partner-head { display: grid; grid-template-columns: 1fr 1.3fr; gap: 56px; align-items: end; margin-bottom: 36px; }
   .partner-head > * { min-width: 0; }
   @media (max-width: 860px) { .partner-head { grid-template-columns: 1fr; gap: 16px; } }
+  /* 3겹 구조 그림 */
+  .stack { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 32px 36px; margin-bottom: 40px; }
+  .stack-fig { position: relative; aspect-ratio: 5 / 4; max-width: 100%; }
+  .stack-fig .ly { position: absolute; left: 12%; right: 4%; height: 20%; border-radius: 12px; transform: skewY(-8deg); box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08); }
+  .stack-fig .ly1 { top: 6%; background: var(--layer1); }
+  .stack-fig .ly2 { top: 38%; background-color: var(--layer2); background-image: radial-gradient(circle, rgba(255, 255, 255, 0.45) 0 2.5px, transparent 3.5px); background-size: 13px 13px; }
+  .stack-fig .ly3 { top: 70%; background-color: var(--layer3); background-image: linear-gradient(115deg, rgba(255, 255, 255, 0.35), transparent 45%); }
+  .stack-fig .tag { position: absolute; left: 0; font: 600 13px var(--mono); color: var(--bg); background: var(--ink); width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; }
+  .stack-legend { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+  .stack-legend li { display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; }
+  .stack-legend li > * { min-width: 0; }
+  .num { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--bg); font: 600 14px var(--mono); }
+  .stack-legend strong { display: block; font-size: 18px; }
+  .stack-legend span.d { color: var(--muted); font-size: 15px; }
+  .stack-note { grid-column: 1 / -1; margin: 0; color: var(--muted); font-size: 14.5px; border-top: 1px solid var(--line); padding-top: 14px; }
+  .spec-group { margin: 0 0 14px; font-size: 18px; }
+  .spec-card h3 .num { width: 24px; height: 24px; font-size: 12px; margin-right: 8px; vertical-align: 2px; }
+  .specs + .spec-group { margin-top: 32px; }
+  @media (max-width: 760px) { .stack { grid-template-columns: 1fr; padding: 24px; gap: 24px; } .stack-fig { max-width: 340px; } }
   .specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
   .spec-card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px 22px 10px; min-width: 0; }
   .spec-card h3 { margin: 0 0 4px; font-size: 18px; }
@@ -304,9 +323,23 @@
         </div>
       </div>
 
+      <div class="stack" role="group" aria-label="3겹 구조">
+        <div class="stack-fig" aria-hidden="true">
+          <div class="ly ly1"></div><div class="ly ly2"></div><div class="ly ly3"></div>
+          <span class="tag" style="top: 14%">1</span><span class="tag" style="top: 46%">2</span><span class="tag" style="top: 78%">3</span>
+        </div>
+        <ol class="stack-legend">
+          <li><span class="num">1</span><div><strong data-en="Top nonwoven">윗면 부직포</strong><span class="d" data-en="Touches the skin · ES through-air nonwoven">피부에 닿는 면 · ES 열풍 부직포</span></div></li>
+          <li><span class="num">2</span><div><strong data-en="Middle nonwoven">가운데 부직포</strong><span class="d" data-en="Textured layer under the top · 3D patterned spunlace">윗면을 받치는 요철 층 · 입체 무늬 스펀레이스</span></div></li>
+          <li><span class="num">3</span><div><strong data-en="Waterproof film">방수 필름</strong><span class="d" data-en="Blocks liquids · non-porous film">액체를 막는 바닥 · 무공 필름</span></div></li>
+        </ol>
+        <p class="stack-note" data-en="The three layers are laminated into one sheet about 270 × 150 cm, with side flaps tucked under the mattress.">세 층을 하나로 합지해 약 270 × 150cm 시트로 만들고, 양 끝에는 매트리스 아래로 넣는 날개를 붙입니다.</p>
+      </div>
+
+      <h3 class="spec-group" data-en="Materials by layer">층별 소재</h3>
       <div class="specs">
         <div class="spec-card">
-          <h3 data-en="Top nonwoven">윗면 부직포</h3>
+          <h3><span class="num">1</span><span data-en="Top nonwoven">윗면 부직포</span></h3>
           <p class="what" data-en="Top layer that touches the skin">피부에 직접 닿는 윗면 소재</p>
           <dl>
             <div><dt data-en="Type">종류</dt><dd data-en="ES through-air bonded nonwoven, hydrophilic">ES 열풍 부직포(에어스루), 친수 처리</dd></div>
@@ -320,7 +353,7 @@
         </div>
 
         <div class="spec-card">
-          <h3 data-en="Middle nonwoven">가운데 부직포</h3>
+          <h3><span class="num">2</span><span data-en="Middle nonwoven">가운데 부직포</span></h3>
           <p class="what" data-en="Textured layer under the top layer">윗면 아래에 받치는 요철 소재</p>
           <dl>
             <div><dt data-en="Type">종류</dt><dd data-en="Jacquard / 3D textured spunlace">입체(요철) 무늬 스펀레이스</dd></div>
@@ -334,7 +367,7 @@
         </div>
 
         <div class="spec-card">
-          <h3 data-en="Waterproof film">방수 필름</h3>
+          <h3><span class="num">3</span><span data-en="Waterproof film">방수 필름</span></h3>
           <p class="what" data-en="Bottom layer that blocks liquids">액체를 막는 바닥면 소재</p>
           <dl>
             <div><dt data-en="Type">종류</dt><dd data-en="Non-porous film">구멍 없는 무공 필름</dd></div>
@@ -345,6 +378,10 @@
           </dl>
         </div>
 
+      </div>
+
+      <h3 class="spec-group" data-en="Flaps, lamination and packaging">날개·합지·포장</h3>
+      <div class="specs">
         <div class="spec-card">
           <h3 data-en="Side nonwoven">날개용 부직포</h3>
           <p class="what" data-en="Edge material tucked under the mattress">매트리스 아래로 접어 넣는 가장자리 소재</p>

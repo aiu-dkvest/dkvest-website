@@ -187,7 +187,7 @@
   .spec-card .what { margin: 0 0 12px; color: var(--muted); font-size: 14.5px; }
   .spec-card dl { margin: 0; }
   @supports (grid-template-rows: subgrid) {
-    .spec-card { display: grid; grid-template-rows: subgrid; grid-row: span 10; row-gap: 0; align-content: start; }
+    .spec-card { display: grid; grid-template-rows: subgrid; grid-row: span 4; row-gap: 0; align-content: start; }
     .spec-card dl { display: contents; }
   }
   .spec-card dl div { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding: 9px 0; border-top: 1px solid var(--line); font-size: 14.5px; }
@@ -330,7 +330,7 @@
           <h2 id="partner-title" data-en="Partnership inquiries">제휴 문의</h2>
         </div>
         <div>
-          <p class="muted" data-en="We are building a wide-format disposable product and are looking for material suppliers and converting partners. If you can supply the materials below, or laminate and convert materials we supply, please email your company profile and data sheets. We reply within 2 business days.">폭이 넓은 일회용 생활용품을 만들기 위해 소재사와 가공 파트너를 찾고 있습니다. 아래 소재를 공급하시거나, 저희가 공급하는 원단으로 합지·가공이 가능하시면 회사 소개와 제품 사양서를 메일로 보내 주세요. 영업일 기준 2일 안에 답변드립니다.</p>
+          <p class="muted" data-en="We are building a wide-format disposable product and are looking for material suppliers and converting partners. If you can supply the materials below, or laminate and convert materials we supply, please email your company profile and data sheets. We reply within 2 business days and will send our detailed specification separately.">폭이 넓은 일회용 생활용품을 만들기 위해 소재사와 가공 파트너를 찾고 있습니다. 아래 소재를 공급하시거나, 저희가 공급하는 원단으로 합지·가공이 가능하시면 회사 소개와 제품 사양서를 메일로 보내 주세요. 영업일 기준 2일 안에 답변드리고, 자세한 사양서는 따로 보내 드립니다.</p>
           <a class="mail" href="mailto:contact@dkvest.com">contact@dkvest.com</a>
         </div>
       </div>
@@ -398,105 +398,64 @@
 </svg>
         </div>
         <ol class="stack-legend">
-          <li><span class="num">1</span><div><strong data-en="Top nonwoven">윗면 부직포</strong><span class="d" data-en="Touches the skin · ES through-air nonwoven">피부에 닿는 면 · ES 열풍 부직포</span></div></li>
-          <li class="bond"><span class="quilt" aria-hidden="true"></span><div><strong data-en="1 + 2: grid quilting">1·2층 붙이기: 격자 누빔</strong><span class="d" data-en="Ultrasonic grid quilting, about 10–20 cm squares, so each square keeps its texture">약 10~20cm 격자로 초음파 누빔해, 칸마다 요철이 살아 있게 붙입니다</span></div></li>
-          <li><span class="num">2</span><div><strong data-en="Middle nonwoven">가운데 부직포</strong><span class="d" data-en="Seersucker-like textured layer under the top · 3D patterned spunlace">윗면을 받치는 시어서커 같은 요철 층 · 입체 무늬 스펀레이스</span></div></li>
-          <li class="bond"><span class="glue dense" aria-hidden="true"></span><div><strong data-en="2 + 3: firm bond">2·3층 붙이기: 확실하게</strong><span class="d" data-en="Hot-melt sprayed densely so the film stays attached, even with oils">핫멜트를 촘촘히 뿌려, 오일이 닿아도 필름이 떨어지지 않게 붙입니다</span></div></li>
-          <li><span class="num">3</span><div><strong data-en="Waterproof film">방수 필름</strong><span class="d" data-en="Blocks liquids · non-porous film">액체를 막는 바닥 · 무공 필름</span></div></li>
+          <li><span class="num">1</span><div><strong data-en="Top nonwoven">윗면 부직포</strong><span class="d" data-en="Soft layer that touches the skin">피부에 닿는 부드러운 면</span></div></li>
+          <li><span class="num">2</span><div><strong data-en="Middle nonwoven">가운데 부직포</strong><span class="d" data-en="Textured layer under the top">윗면을 받치는 요철 층</span></div></li>
+          <li><span class="num">3</span><div><strong data-en="Waterproof film">방수 필름</strong><span class="d" data-en="Waterproof base layer">액체를 막는 바닥</span></div></li>
         </ol>
-        <p class="stack-note" data-en="Layers 1 and 2 are grid-quilted, and layers 2 and 3 are bonded with spray hot-melt (orange dots), making one sheet about 270 × 150 cm, with side flaps tucked under the mattress.">1·2층은 격자로 누비고, 2·3층은 스프레이 핫멜트(주황색 점)로 붙여 약 270 × 150cm 시트로 만들고, 양 끝에는 매트리스 아래로 넣는 날개를 붙입니다.</p>
+        <p class="stack-note" data-en="Layer materials, bonding and dimensions are shared in our specification after a mutual NDA.">층별 소재, 붙이는 방법, 크기는 상호 비밀유지계약 후 사양서로 보내 드립니다.</p>
       </div>
 
-      <h3 class="spec-group" data-en="Materials by layer">층별 소재</h3>
+      <h3 class="spec-group" data-en="Materials and processing we are looking for">찾고 있는 소재와 가공</h3>
       <div class="specs">
         <div class="spec-card">
           <h3><span class="num">1</span><span data-en="Top nonwoven">윗면 부직포</span></h3>
-          <p class="what" data-en="Top layer that touches the skin">피부에 직접 닿는 윗면 소재</p>
+          <p class="what" data-en="Soft nonwoven for skin contact">피부에 닿는 부드러운 부직포</p>
           <dl>
-            <div><dt data-en="Type">종류</dt><dd data-en="ES through-air bonded nonwoven, hydrophilic">ES 열풍 부직포(에어스루), 친수 처리</dd></div>
-            <div><dt data-en="Fibre">원료</dt><dd data-en="PE/PET bicomponent (ES) fibre">PE·PET 이성분 섬유 (ES 섬유)</dd></div>
-            <div><dt data-en="Weight">평량</dt><dd>25–30 gsm</dd></div>
+            <div><dt data-en="Type">종류</dt><dd data-en="Through-air bonded nonwoven, spunlace">열풍(에어스루) 부직포, 스펀레이스</dd></div>
             <div><dt data-en="Width">폭</dt><dd data-en="150 cm or more">150cm 이상</dd></div>
-            <div><dt data-en="Need">조건</dt><dd data-en="No thermal point-bonding marks, low-lint grade, no fluorescent whitener or fragrance (OEKO-TEX preferred)">열 엠보(점 무늬) 자국 없음, 저보풀 등급, 형광증백제·향료 무첨가 (OEKO-TEX 인증 우대)</dd></div>
-            <div><dt data-en="Also">비교</dt><dd data-en="Plain spunlace 30 gsm (viscose/PET, lyocell)">플레인 스펀레이스 30gsm (레이온·PET, 라이오셀)</dd></div>
-            <div><dt data-en="Data">자료</dt><dd data-en="Tensile strength (MD/CD), fibre fineness, lint test">인장강도(가로·세로), 섬유 굵기, 보풀 시험</dd></div>
           </dl>
         </div>
-
         <div class="spec-card">
           <h3><span class="num">2</span><span data-en="Middle nonwoven">가운데 부직포</span></h3>
-          <p class="what" data-en="Seersucker-like textured layer under the top layer">윗면 아래에 받치는 시어서커 같은 요철 소재</p>
+          <p class="what" data-en="Textured layer under the top">윗면을 받치는 요철 소재</p>
           <dl>
-            <div><dt data-en="Type">종류</dt><dd data-en="Jacquard / 3D textured spunlace">입체(요철) 무늬 스펀레이스</dd></div>
-            <div><dt data-en="Fibre">원료</dt><dd data-en="Viscose/PET 30:70 or 100% PET">레이온·PET 30:70 또는 PET 100%</dd></div>
-            <div><dt data-en="Weight">평량</dt><dd>40–50 gsm</dd></div>
+            <div><dt data-en="Type">종류</dt><dd data-en="3D patterned spunlace">입체 무늬 스펀레이스</dd></div>
             <div><dt data-en="Width">폭</dt><dd data-en="150 cm or more">150cm 이상</dd></div>
-            <div><dt data-en="Need">조건</dt><dd data-en="Texture that holds up under pressure and when wet">눌리거나 젖어도 요철이 유지될 것</dd></div>
-            <div><dt data-en="Also">비교</dt><dd data-en="3D embossed ES through-air nonwoven">3D 엠보 ES 열풍 부직포</dd></div>
-            <div><dt data-en="Data">자료</dt><dd data-en="Swatches of each pattern, tensile strength">무늬별 견본, 인장강도</dd></div>
           </dl>
         </div>
-
         <div class="spec-card">
           <h3><span class="num">3</span><span data-en="Waterproof film">방수 필름</span></h3>
-          <p class="what" data-en="Bottom layer that blocks liquids">액체를 막는 바닥면 소재</p>
+          <p class="what" data-en="Waterproof base layer">액체를 막는 바닥 소재</p>
           <dl>
-            <div><dt data-en="Type">종류</dt><dd data-en="Non-porous film">구멍 없는 무공 필름</dd></div>
-            <div><dt data-en="Material">원료</dt><dd data-en="Soft PE, PEVA, TPU (polyether, Shore 80–85A)">부드러운 PE, PEVA, TPU (폴리에테르, Shore 80–85A)</dd></div>
-            <div><dt data-en="Thickness">두께</dt><dd data-en="PE 15–20 µm, PEVA 20–35 µm, TPU 20–25 µm">PE 15–20㎛, PEVA 20–35㎛, TPU 20–25㎛</dd></div>
+            <div><dt data-en="Type">종류</dt><dd data-en="Soft non-porous film (PE, PEVA, TPU)">구멍 없는 부드러운 필름 (PE, PEVA, TPU)</dd></div>
             <div><dt data-en="Width">폭</dt><dd data-en="150 cm or more">150cm 이상</dd></div>
-            <div><dt data-en="Need">조건</dt><dd data-en="Matte or embossed, low noise">무광 또는 엠보, 저소음</dd></div>
-            <div><dt data-en="Also">비교</dt><dd data-en="The three materials above, compared under the same conditions">위 세 가지 원료를 같은 조건으로 비교</dd></div>
-            <div><dt data-en="Data">자료</dt><dd data-en="Hydrostatic head, water vapour transmission (with test method), resistance to oils and lubricants">내수압, 투습도(시험법 포함), 오일·윤활제 저항성</dd></div>
           </dl>
         </div>
-
-      </div>
-
-      <h3 class="spec-group" data-en="Flaps, lamination and packaging">날개·합지·포장</h3>
-      <div class="specs">
         <div class="spec-card">
-          <h3 data-en="Side nonwoven">날개용 부직포</h3>
+          <h3><span data-en="Flap nonwoven">날개용 부직포</span></h3>
           <p class="what" data-en="Edge material tucked under the mattress">매트리스 아래로 접어 넣는 가장자리 소재</p>
           <dl>
-            <div><dt data-en="Type">종류</dt><dd data-en="Plain spunlace, hydrophobic">플레인 스펀레이스, 소수성</dd></div>
-            <div><dt data-en="Fibre">원료</dt><dd data-en="100% PET">PET 100%</dd></div>
-            <div><dt data-en="Weight">평량</dt><dd>25–30 gsm</dd></div>
+            <div><dt data-en="Type">종류</dt><dd data-en="Water-repellent nonwoven">발수 부직포</dd></div>
             <div><dt data-en="Width">폭</dt><dd data-en="150 cm or more">150cm 이상</dd></div>
-            <div><dt data-en="Also">비교</dt><dd data-en="Hydrophobic PP spunbond 15–20 gsm">소수성 PP 스펀본드 15–20gsm</dd></div>
-            <div><dt data-en="Data">자료</dt><dd data-en="Tensile strength (MD/CD), water repellency">인장강도(가로·세로), 발수성</dd></div>
           </dl>
         </div>
-
         <div class="spec-card">
-          <h3 data-en="Lamination &amp; converting">합지·가공</h3>
+          <h3><span data-en="Lamination & converting">합지·가공</span></h3>
           <p class="what" data-en="Making sheets from materials we supply">저희가 공급하는 원단으로 시트를 만드는 공정</p>
           <dl>
-            <div><dt data-en="Basis">방식</dt><dd data-en="Toll processing with materials we supply">원단 사급 임가공</dd></div>
-            <div><dt data-en="Quilting">누빔</dt><dd data-en="Layers 1 and 2: ultrasonic grid quilting, about 10–20 cm squares, 150 cm or wider">1·2층: 초음파 격자 누빔 (약 10~20cm 칸), 폭 150cm 이상</dd></div>
-            <div><dt data-en="Lamination">합지</dt><dd data-en="Layers 2 and 3: spray hot-melt (no quilting through the film)">2·3층: 스프레이 핫멜트 (필름은 누비지 않음)</dd></div>
-            <div><dt data-en="Need">조건</dt><dd data-en="No pressed marks on the surface; low pressure so the middle texture stays">표면 눌림 자국 없이, 가운데 요철이 유지되도록 낮은 압력</dd></div>
-            <div><dt data-en="Finishing">가공</dt><dd data-en="Heat-sealed edges">테두리 열융착</dd></div>
-            <div><dt data-en="Cutting">재단</dt><dd data-en="Large sheets about 270 cm long">길이 약 270cm 대형 시트</dd></div>
-            <div><dt data-en="Packing">포장</dt><dd data-en="Multi-fold, pouch insertion and sealing, boxing">여러 번 접기, 파우치 투입·밀봉, 상자 포장</dd></div>
-            <div><dt data-en="Runs">수량</dt><dd data-en="Trial lamination and small prototype runs welcome">시험 합지·소량 시제품 대응 가능 업체 우대</dd></div>
+            <div><dt data-en="Type">종류</dt><dd data-en="Ultrasonic quilting, hot-melt lamination, cutting, folding, packing">초음파 누빔, 핫멜트 합지, 재단·접기·포장</dd></div>
+            <div><dt data-en="Width">폭</dt><dd data-en="Fabric 150 cm or wider">150cm 이상 원단 가공</dd></div>
           </dl>
         </div>
-
         <div class="spec-card">
-          <h3 data-en="Packaging">포장재</h3>
-          <p class="what" data-en="Individual pouch and retail box">개별 포장 파우치와 판매용 상자</p>
+          <h3><span data-en="Packaging">포장재</span></h3>
+          <p class="what" data-en="Unit pouches and retail boxes">개별 포장 파우치와 판매용 상자</p>
           <dl>
-            <div><dt data-en="Pouch">파우치</dt><dd data-en="Zipper pouch, matte, opaque, odour barrier">지퍼 파우치, 무광·불투명, 냄새 차단</dd></div>
-            <div><dt data-en="Size">크기</dt><dd data-en="About 26 cm (W) × 43 cm (H)">가로 약 26cm × 세로 약 43cm</dd></div>
-            <div><dt data-en="Gusset">거싯 폭</dt><dd data-en="Bottom gusset about 4 cm">바닥 거싯 약 4cm</dd></div>
-            <div><dt data-en="Opening">개봉</dt><dd data-en="Easy-tear seal on the short side with a zipper below">짧은 변 이지컷 밀봉 + 그 아래 지퍼</dd></div>
-            <div><dt data-en="Box">상자</dt><dd data-en="Sturdy printed paper box, tear-open">두꺼운 판지 인쇄 상자, 절취선 개봉</dd></div>
-            <div><dt data-en="Printing">인쇄</dt><dd data-en="Digital printing for small first runs">초기 소량은 디지털 인쇄</dd></div>
+            <div><dt data-en="Type">종류</dt><dd data-en="Zipper pouches, printed boxes">지퍼 파우치, 인쇄 상자</dd></div>
+            <div><dt data-en="Quantity">수량</dt><dd data-en="Small runs">소량 생산 대응</dd></div>
           </dl>
         </div>
       </div>
-
       <div class="common">
         <div>
           <h3 data-en="Please include">보내 주시면 좋은 자료</h3>
